@@ -479,12 +479,10 @@
       statusEl.textContent = '';
 
       try {
-        const payload = { nameRole, teammates, teamName, ackNoAI, ackSubmission: ackSub, ackPurpose };
-        await fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+        const params = new URLSearchParams({ nameRole, teammates, teamName, ackNoAI, ackSubmission: ackSub, ackPurpose });
+        await fetch(APPS_SCRIPT_URL + '?' + params.toString(), {
+          method: 'GET',
+          mode: 'no-cors'
         });
 
         document.getElementById('form-wrapper').style.display = 'none';
