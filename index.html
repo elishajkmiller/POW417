@@ -52,7 +52,6 @@
     justify-content: space-between;
     padding: 1.25rem 3rem;
     background: transparent;
-    mix-blend-mode: normal;
     transition: background 0.4s;
   }
   nav.scrolled {
@@ -407,8 +406,8 @@
   .badge-hard { color: var(--red); border-color: var(--red); }
   .badge-core { color: #555; border-color: #aaa; }
 
-  /* JOIN */
-  .join-section {
+  /* REGISTER SECTION */
+  .register-section {
     background: var(--ink);
     color: var(--dust);
     padding: 10rem 3rem;
@@ -416,7 +415,7 @@
     position: relative;
     overflow: hidden;
   }
-  .join-bg-text {
+  .register-bg-text {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -431,7 +430,7 @@
     pointer-events: none;
     user-select: none;
   }
-  .join-eyebrow {
+  .register-eyebrow {
     font-family: 'Space Mono', monospace;
     font-size: 0.65rem;
     letter-spacing: 0.3em;
@@ -439,61 +438,51 @@
     opacity: 0.35;
     margin-bottom: 2rem;
   }
-  .join-headline {
+  .register-headline {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 900;
     font-size: clamp(3rem, 9vw, 7rem);
     text-transform: uppercase;
     line-height: 0.88;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     position: relative;
     z-index: 1;
   }
-  .join-sub {
+  .register-sub {
     font-size: 1rem;
     opacity: 0.5;
-    max-width: 480px;
+    max-width: 440px;
     margin: 0 auto 3rem;
     position: relative;
     z-index: 1;
     line-height: 1.7;
   }
-  .join-form {
-    display: flex;
-    gap: 0;
-    max-width: 480px;
-    margin: 0 auto;
+  .register-deadline {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.3;
+    margin-bottom: 2.5rem;
     position: relative;
     z-index: 1;
   }
-  .join-form input {
-    flex: 1;
-    padding: 0.9rem 1.25rem;
-    background: rgba(234,224,216,0.08);
-    border: 1px solid rgba(234,224,216,0.2);
-    border-right: none;
-    color: var(--dust);
-    font-family: 'Barlow', sans-serif;
-    font-size: 0.9rem;
-    outline: none;
-    transition: background 0.2s;
-  }
-  .join-form input::placeholder { opacity: 0.35; color: var(--dust); }
-  .join-form input:focus { background: rgba(234,224,216,0.12); }
-  .join-form button {
-    padding: 0.9rem 1.75rem;
-    background: var(--dust);
-    border: none;
-    color: var(--ink);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
+  .register-btn {
+    display: inline-block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s;
-    white-space: nowrap;
+    padding: 0.9rem 2.5rem;
+    background: var(--dust);
+    color: var(--ink);
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    position: relative;
+    z-index: 1;
   }
-  .join-form button:hover { background: #fff; }
+  .register-btn:hover { background: #fff; transform: translateY(-2px); }
 
   /* FOOTER */
   footer {
@@ -623,12 +612,10 @@
     .manifesto-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .philosophy-grid { grid-template-columns: 1fr; gap: 3rem; }
     .phil-sidebar { position: static; }
-    .join-section { padding: 7rem 1.5rem; }
+    .register-section { padding: 7rem 1.5rem; }
     footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
     .hero-sub { flex-direction: column; align-items: flex-start; }
     .hero-meta { text-align: left; }
-    .join-form { flex-direction: column; }
-    .join-form input { border-right: 1px solid rgba(234,224,216,0.2); border-bottom: none; }
     .no-ai-banner { padding: 0.6rem 1.5rem; }
     .hours-grid { grid-template-columns: 1fr; }
     .hour-block { border-right: none; border-bottom: 1px solid var(--border); }
@@ -645,12 +632,10 @@
     <li><a href="#about">About</a></li>
     <li><a href="#the48">The 48</a></li>
     <li><a href="#rules">Rules</a></li>
-    <li><a href="#join">Get Involved</a></li>
+    <li><a href="#register">Register</a></li>
   </ul>
-  <a href="#join" class="nav-cta">Sign Up</a>
+  <a href="register.html" class="nav-cta">Register</a>
 </nav>
-
-
 
 <!-- HERO -->
 <section class="hero" style="padding-top:6rem;">
@@ -713,9 +698,8 @@
     </div>
     <div class="manifesto-body reveal reveal-delay-2">
       <p>POW417 is a 48-hour film gathering built around one simple idea: what happens when people actually show up and make something real, together, by hand?</p>
-      <p>No rankings. No trophies. No algorithm. Just crews, cameras, and the clock. Every team gets the same prompt, the same deadline, and the same constraints. What you do with it is entirely yours.</p>
+      <p>No rankings. No trophies. No algorithm. Just crews, cameras, and the clock. Every team gets the same deadline and the same constraints. What you do with it is entirely yours.</p>
       <p>We built this because the 417 deserves a film event that respects the craft. One that says the human eye, the human hand, and the human story still matter — maybe more than ever.</p>
-
     </div>
   </div>
 </section>
@@ -723,12 +707,12 @@
 <!-- THE 48 HOURS -->
 <section class="hours-section" id="the48">
   <div class="section-label">002 — The Format</div>
-  <h2 class="reveal" style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(2rem,5vw,4rem); text-transform:uppercase; line-height:0.9; margin-bottom:3rem; letter-spacing:-0.01em;">48 Hours.<br>One Prompt.<br>Make a Film.</h2>
+  <h2 class="reveal" style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(2rem,5vw,4rem); text-transform:uppercase; line-height:0.9; margin-bottom:3rem; letter-spacing:-0.01em;">48 Hours.<br>No Prompt.<br>Make a Film.</h2>
   <div class="hours-grid reveal reveal-delay-1">
     <div class="hour-block" data-num="00">
       <div class="hour-time">Hour 00 — Kickoff</div>
-      <div class="hour-title">The Prompt Drops</div>
-      <div class="hour-desc">Everyone receives the same creative brief at the same moment. Genre, a required line of dialogue, and a prop. From here, it's all you.</div>
+      <div class="hour-title">Opening Ceremonies</div>
+      <div class="hour-desc">Gather with your crew. The clock starts when ceremonies close. No prompt — just your vision, your team, and 48 hours. Pure human ingenuity from the jump.</div>
     </div>
     <div class="hour-block" data-num="01">
       <div class="hour-time">Hours 01–12 — Pre-Pro</div>
@@ -781,19 +765,12 @@
       <div class="rule-item reveal reveal-delay-2">
         <div class="rule-num">03</div>
         <div class="rule-content">
-          <div class="rule-title">Use the Prompt <span class="rule-badge badge-core">Core</span></div>
-          <div class="rule-body">Every film must incorporate the required genre, the required prop, and the required line of dialogue. These are revealed at kickoff and are the same for everyone. This is the creative constraint that makes all films comparable.</div>
-        </div>
-      </div>
-      <div class="rule-item reveal reveal-delay-3">
-        <div class="rule-num">04</div>
-        <div class="rule-content">
           <div class="rule-title">5 Minutes Maximum <span class="rule-badge badge-core">Core</span></div>
           <div class="rule-body">Your finished film — credits included — must not exceed 5 minutes. Short constraints force real decisions. Own every second.</div>
         </div>
       </div>
-      <div class="rule-item reveal reveal-delay-4">
-        <div class="rule-num">05</div>
+      <div class="rule-item reveal reveal-delay-3">
+        <div class="rule-num">04</div>
         <div class="rule-content">
           <div class="rule-title">Show Up for the Screening <span class="rule-badge badge-core">Expected</span></div>
           <div class="rule-body">This isn't a drop-box event. Being present at the screening is part of the deal. We make films together, we watch them together. That's what makes this different.</div>
@@ -803,20 +780,18 @@
   </div>
 </section>
 
-<!-- HR -->
 <hr class="h-rule">
 
-<!-- JOIN -->
-<section class="join-section" id="join">
-  <div class="join-bg-text" aria-hidden="true">POW417</div>
-  <p class="join-eyebrow reveal">004 — Get Involved</p>
-  <h2 class="join-headline reveal reveal-delay-1">You In?</h2>
-  <p class="join-sub reveal reveal-delay-2">Drop your email and we'll reach out with dates, details, and how to register your crew. All skill levels. All cameras.</p>
-  <div class="join-form reveal reveal-delay-3">
-    <input type="email" placeholder="your@email.com" id="email-input">
-    <button onclick="handleSignup()">Notify Me</button>
-  </div>
-  <p id="signup-msg" style="font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; margin-top:1.5rem; opacity:0; transition:opacity 0.4s; color:var(--dust);"></p>
+<!-- REGISTER -->
+<section class="register-section" id="register">
+  <div class="register-bg-text" aria-hidden="true">POW417</div>
+  <p class="register-eyebrow reveal">004 — Get Involved</p>
+  <h2 class="register-headline reveal reveal-delay-1">You In?</h2>
+  <p class="register-sub reveal reveal-delay-2">
+    No prompt this year — just human ingenuity. Assemble your crew, register your team, and show up ready to make something real.
+  </p>
+  <p class="register-deadline reveal reveal-delay-3">Registration closes — Noon, April 24, 2026</p>
+  <a href="register.html" class="register-btn reveal reveal-delay-4">Register Your Team</a>
 </section>
 
 <!-- FOOTER -->
@@ -826,7 +801,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#the48">The 48</a></li>
     <li><a href="#rules">Rules</a></li>
-    <li><a href="mailto:pow417film@gmail.com">Contact</a></li>
+    <li><a href="mailto:pow417films@gmail.com">Contact</a></li>
   </ul>
   <p class="footer-copy">POW417 — Proof of Work — Springfield, MO — Human Films Only</p>
 </footer>
@@ -849,26 +824,6 @@
     });
   }, { threshold: 0.12 });
   reveals.forEach(el => observer.observe(el));
-
-  // Signup
-  function handleSignup() {
-    const input = document.getElementById('email-input');
-    const msg = document.getElementById('signup-msg');
-    const val = input.value.trim();
-    if (!val || !val.includes('@')) {
-      msg.textContent = 'Enter a valid email.';
-      msg.style.opacity = 1;
-      msg.style.color = '#e57373';
-      return;
-    }
-    msg.textContent = "You're on the list. We'll be in touch.";
-    msg.style.opacity = 1;
-    msg.style.color = 'var(--dust)';
-    input.value = '';
-    input.disabled = true;
-    document.querySelector('.join-form button').disabled = true;
-    document.querySelector('.join-form button').textContent = 'Done';
-  }
 </script>
 </body>
 </html>
