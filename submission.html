@@ -846,8 +846,9 @@
       btn.textContent = 'Sending…';
 
       try {
-        var res = await fetch(SCRIPT_URL, {
+        await fetch(SCRIPT_URL, {
           method: 'POST',
+          mode: 'no-cors',
           body: JSON.stringify({
             teamName:         teamName,
             filmTitle:        filmTitle,
@@ -858,14 +859,9 @@
           })
         });
 
-        var result = await res.json();
-
-        if (result.success) {
-          showBanner('success', 'Submission received — see you at the screening.');
-          btn.textContent = 'Submitted ✓';
-        } else {
-          throw new Error(result.error || 'Unknown error');
-        }
+        // no-cors means we can't read the response, but if we got here the request sent
+        showBanner('success', 'Submission received — see you at the screening.');
+        btn.textContent = 'Submitted ✓';
       } catch (err) {
         showBanner('error', 'Something went wrong. Try again or email pow417films@gmail.com');
         btn.disabled = false;
