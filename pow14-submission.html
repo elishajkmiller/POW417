@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>POW417 — Film Submission</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dust: #DFD0CE;
+      --dust-dark: #C9B8B5;
+      --ink: #111008;
+      --ink-mid: #2C2618;
+      --red: #8C1F0E;
+      --red-light: #C43D28;
+      --warm: #E8DADA;
+      --border: rgba(17,16,8,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dust);
+      color: var(--ink);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* GRAIN */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.72;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: transparent;
+      transition: background 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(234,224,216,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a.active { opacity: 1; border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 10rem 3rem 5rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      opacity: 0.55;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .page-header-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(4rem, 14vw, 11rem);
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+    .page-header-sub {
+      margin-top: 1.5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0.65;
+      max-width: 500px;
+    }
+    .page-header-bg {
+      position: absolute;
+      top: 50%;
+      right: -1rem;
+      transform: translateY(-50%);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 18vw;
+      text-transform: uppercase;
+      opacity: 0.04;
+      letter-spacing: -0.04em;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+      line-height: 1;
+    }
+
+    /* DEADLINE BANNER */
+    .deadline-banner {
+      background: var(--ink);
+      color: var(--dust);
+      padding: 0.75rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .deadline-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.45;
+    }
+    .deadline-val {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .deadline-note {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.35;
+    }
+
+    /* FORM BODY */
+    .form-body {
+      max-width: 860px;
+      padding: 5rem 3rem 7rem;
+    }
+
+    /* SECTION LABEL */
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* FIELD */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .field { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .field label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+
+    .field input {
+      background: transparent;
+      border: none;
+      border-bottom: 1.5px solid rgba(17,16,8,0.25);
+      color: var(--ink);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1.25rem;
+      letter-spacing: 0.04em;
+      padding: 0.6rem 0;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .field input:focus { border-bottom-color: var(--ink); }
+    .field input::placeholder {
+      font-weight: 300;
+      opacity: 0.35;
+      letter-spacing: 0.02em;
+    }
+    .field input.error { border-bottom-color: var(--red); }
+
+    /* YOUTUBE */
+    .yt-wrap { margin-bottom: 4rem; }
+
+    .yt-input-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1.5px solid rgba(17,16,8,0.25);
+      transition: border-color 0.2s;
+    }
+    .yt-input-row:focus-within { border-bottom-color: var(--ink); }
+    .yt-input-row.error { border-bottom-color: var(--red); }
+
+    .yt-glyph {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .yt-input-row input {
+      background: transparent;
+      border: none;
+      color: var(--ink);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1.25rem;
+      letter-spacing: 0.03em;
+      padding: 0.6rem 0;
+      outline: none;
+      width: 100%;
+    }
+    .yt-input-row input::placeholder { font-weight: 300; opacity: 0.35; }
+
+    .yt-note {
+      margin-top: 0.75rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      opacity: 0.5;
+      line-height: 1.7;
+    }
+    .yt-note strong { color: var(--red); font-weight: 400; }
+
+    /* POSTER */
+    .poster-wrap { margin-bottom: 4rem; }
+
+    .poster-zone {
+      border: 1.5px dashed rgba(17,16,8,0.2);
+      padding: 3.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+      text-align: center;
+    }
+
+    .poster-zone:hover, .poster-zone.dragging {
+      border-color: var(--ink);
+      background: rgba(17,16,8,0.03);
+    }
+
+    .poster-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .poster-zone-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    .poster-zone-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.35;
+    }
+
+    .poster-preview {
+      display: none;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem 0;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .poster-preview.visible { display: flex; }
+
+    .poster-preview img {
+      width: 52px;
+      height: 74px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+
+    .poster-preview-info { flex: 1; }
+
+    .poster-preview-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    .poster-preview-size {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      opacity: 0.45;
+    }
+
+    .remove-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: none;
+      border: 1px solid rgba(17,16,8,0.25);
+      color: var(--ink);
+      padding: 0.4rem 0.9rem;
+      cursor: pointer;
+      opacity: 0.55;
+      transition: opacity 0.2s, border-color 0.2s;
+    }
+    .remove-btn:hover { opacity: 1; border-color: var(--red); color: var(--red); }
+
+    /* PARTICIPANTS */
+    .participants-wrap { margin-bottom: 4rem; }
+
+    .participant-notice {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      line-height: 1.8;
+      opacity: 0.55;
+      margin-bottom: 2rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--red);
+    }
+
+    .participants-list { margin-bottom: 1rem; }
+
+    .participant-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 1.5rem;
+      align-items: end;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+      animation: slideIn 0.2s ease;
+    }
+
+    .participant-row:first-child { border-top: 1px solid var(--border); }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .participant-row .p-field { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .participant-row .p-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.45;
+    }
+
+    .participant-row input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(17,16,8,0.15);
+      color: var(--ink);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 0.03em;
+      padding: 0.4rem 0;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s;
+    }
+
+    .participant-row input:focus { border-bottom-color: var(--ink); }
+    .participant-row input::placeholder { font-weight: 300; opacity: 0.3; }
+
+    .del-btn {
+      background: none;
+      border: none;
+      color: var(--ink);
+      opacity: 0.2;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.4rem;
+      transition: opacity 0.2s, color 0.2s;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .del-btn:hover { opacity: 1; color: var(--red); }
+    .del-btn:disabled { opacity: 0.1; cursor: default; pointer-events: none; }
+
+    .add-participant-btn {
+      background: none;
+      border: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.45;
+      cursor: pointer;
+      padding: 0.75rem 0;
+      transition: opacity 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .add-participant-btn::before { content: '+'; font-size: 0.9rem; }
+    .add-participant-btn:hover { opacity: 1; }
+
+    /* SUBMIT */
+    .submit-section {
+      background: var(--ink);
+      color: var(--dust);
+      padding: 5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .submit-left {}
+
+    .submit-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0.35;
+      margin-bottom: 0.75rem;
+    }
+
+    .submit-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      text-transform: uppercase;
+      line-height: 0.88;
+      margin-bottom: 1.25rem;
+    }
+
+    .submit-note {
+      font-size: 0.85rem;
+      opacity: 0.5;
+      max-width: 360px;
+      line-height: 1.7;
+    }
+
+    .submit-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.75rem;
+      background: var(--dust);
+      color: var(--ink);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .submit-btn:hover:not(:disabled) { background: #fff; transform: translateY(-2px); }
+    .submit-btn:active:not(:disabled) { transform: translateY(0); }
+    .submit-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    /* BANNERS */
+    .banner {
+      display: none;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 1rem 3rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      animation: fadeIn 0.4s ease;
+    }
+    .banner.success { background: var(--ink); color: var(--dust); }
+    .banner.error   { background: var(--red); color: #fff; }
+    .banner.visible { display: flex; }
+    .banner-icon { font-size: 1rem; flex-shrink: 0; }
+
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+    /* FOOTER */
+    footer {
+      padding: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.25rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      opacity: 0.3;
+    }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-header { padding: 7rem 1.5rem 3rem; }
+      .deadline-banner { padding: 0.75rem 1.5rem; }
+      .form-body { padding: 3rem 1.5rem 5rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .submit-section { padding: 3.5rem 1.5rem; flex-direction: column; align-items: flex-start; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+      .participant-row { grid-template-columns: 1fr auto; }
+      .participant-row .p-field:nth-child(2) { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">POW<span style="color:var(--red)">4</span>17</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="guidelines.html">Guidelines</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="submission.html" class="active">Submit</a></li>
+    </ul>
+  </nav>
+
+  <!-- BANNER (success/error) -->
+  <div class="banner" id="banner">
+    <span class="banner-icon" id="bannerIcon"></span>
+    <span id="bannerText"></span>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="page-header-bg" aria-hidden="true">Submit</div>
+    <span class="page-header-eyebrow reveal">005 — Final Submission</span>
+    <h1 class="page-header-title reveal reveal-delay-1">Deliver<br>Your Film</h1>
+    <p class="page-header-sub reveal reveal-delay-2">You made it. Now get it in. Fill out everything below before the clock hits zero.</p>
+  </header>
+
+  <!-- DEADLINE BANNER -->
+  <div class="deadline-banner">
+    <span class="deadline-label">Submission Deadline</span>
+    <span class="deadline-val">Sunday — 48 Hours After Kickoff</span>
+    <span class="deadline-note">Late submissions will not be screened</span>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-body">
+
+    <!-- FILM IDENTITY -->
+    <div class="section-label reveal">001 — Film Identity</div>
+    <div class="form-grid">
+      <div class="field reveal">
+        <label for="teamName">Team Name</label>
+        <input id="teamName" type="text" placeholder="Your crew's name" />
+      </div>
+      <div class="field reveal reveal-delay-1">
+        <label for="filmTitle">Film Title</label>
+        <input id="filmTitle" type="text" placeholder="What did you call it?" />
+      </div>
+    </div>
+
+    <!-- FILM LINK -->
+    <div class="section-label reveal">002 — Film Link</div>
+    <div class="yt-wrap reveal reveal-delay-1">
+      <div class="yt-input-row" id="ytRow">
+        <span class="yt-glyph">YT —</span>
+        <input id="ytLink" type="url" placeholder="https://youtu.be/..." />
+      </div>
+      <p class="yt-note">
+        Must be set to <strong>Unlisted</strong> on YouTube before submitting.<br>
+        Public links will not be accepted. Private links cannot be screened.
+      </p>
+    </div>
+
+    <!-- POSTER -->
+    <div class="section-label reveal">003 — Film Poster</div>
+    <div class="poster-wrap reveal reveal-delay-1">
+      <div class="poster-zone" id="posterZone">
+        <input type="file" id="posterInput" accept="image/png,image/jpeg" />
+        <div class="poster-zone-label">Drop Poster Here or Click to Browse</div>
+        <div class="poster-zone-sub">PNG or JPEG &middot; Max 10 MB</div>
+      </div>
+      <div class="poster-preview" id="posterPreview">
+        <img id="posterThumb" src="" alt="Poster preview" />
+        <div class="poster-preview-info">
+          <div class="poster-preview-name" id="posterFileName"></div>
+          <div class="poster-preview-size" id="posterFileSize"></div>
+        </div>
+        <button class="remove-btn" id="removePoster">Remove</button>
+      </div>
+    </div>
+
+    <!-- LATE PARTICIPANTS -->
+    <div class="section-label reveal">004 — Late Additions</div>
+    <div class="participants-wrap reveal reveal-delay-1">
+      <p class="participant-notice">
+        Only list participants who joined after registration closed.<br>
+        These entries will be reviewed by staff before the screening.
+      </p>
+      <div class="participants-list" id="participantsList"></div>
+      <button class="add-participant-btn" id="addParticipantBtn">Add another participant</button>
+    </div>
+
+  </div>
+
+  <!-- SUBMIT SECTION -->
+  <div class="submit-section">
+    <div class="submit-left">
+      <p class="submit-eyebrow">005 — Lock It In</p>
+      <h2 class="submit-headline">That's<br>a Wrap.</h2>
+      <p class="submit-note">By submitting you confirm all content is original, made within the 48-hour window, and free of AI-generated material — per POW417 rules.</p>
+    </div>
+    <button class="submit-btn" id="submitBtn">Submit Film</button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html" class="footer-logo">POW<span style="color:var(--red)">4</span>17</a>
+    <p class="footer-copy">POW417 — Proof of Work — Springfield, MO — Human Films Only</p>
+  </footer>
+
+  <script>
+    // ================================================================
+    //  PASTE YOUR APPS SCRIPT WEB APP URL BELOW
+    // ================================================================
+    var SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
+    // ================================================================
+
+    /* ── NAV SCROLL ── */
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    /* ── REVEAL ── */
+    var reveals = document.querySelectorAll('.reveal');
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(function(el) { revealObserver.observe(el); });
+
+    /* ── POSTER ── */
+    var posterFile = null;
+
+    function showPoster(file) {
+      if (!file || !['image/png','image/jpeg'].includes(file.type)) return;
+      if (file.size > 10 * 1024 * 1024) { showBanner('error', 'Poster must be under 10 MB.'); return; }
+      posterFile = file;
+      document.getElementById('posterThumb').src = URL.createObjectURL(file);
+      document.getElementById('posterFileName').textContent = file.name;
+      document.getElementById('posterFileSize').textContent = (file.size / 1024).toFixed(1) + ' KB';
+      document.getElementById('posterZone').style.display = 'none';
+      document.getElementById('posterPreview').classList.add('visible');
+    }
+
+    document.getElementById('posterInput').addEventListener('change', function(e) { showPoster(e.target.files[0]); });
+
+    var pz = document.getElementById('posterZone');
+    pz.addEventListener('dragover',  function(e) { e.preventDefault(); pz.classList.add('dragging'); });
+    pz.addEventListener('dragleave', function()  { pz.classList.remove('dragging'); });
+    pz.addEventListener('drop', function(e) {
+      e.preventDefault(); pz.classList.remove('dragging'); showPoster(e.dataTransfer.files[0]);
+    });
+
+    document.getElementById('removePoster').addEventListener('click', function() {
+      posterFile = null;
+      document.getElementById('posterInput').value = '';
+      document.getElementById('posterThumb').src = '';
+      document.getElementById('posterPreview').classList.remove('visible');
+      document.getElementById('posterZone').style.display = '';
+    });
+
+    /* ── PARTICIPANTS ── */
+    function addParticipant() {
+      var row = document.createElement('div');
+      row.className = 'participant-row';
+      row.innerHTML =
+        '<div class="p-field"><div class="p-label">Full Name</div><input type="text" placeholder="Jane Doe" /></div>' +
+        '<div class="p-field"><div class="p-label">Role</div><input type="text" placeholder="Director, Editor, DP…" /></div>' +
+        '<button class="del-btn" onclick="removeParticipant(this)" title="Remove">×</button>';
+      document.getElementById('participantsList').appendChild(row);
+      updateDelBtns();
+    }
+
+    function removeParticipant(btn) {
+      btn.closest('.participant-row').remove();
+      updateDelBtns();
+    }
+
+    function updateDelBtns() {
+      var rows = document.querySelectorAll('.participant-row');
+      rows.forEach(function(r) { r.querySelector('.del-btn').disabled = rows.length === 1; });
+    }
+
+    document.getElementById('addParticipantBtn').addEventListener('click', addParticipant);
+    addParticipant();
+
+    /* ── BANNER ── */
+    function showBanner(type, msg) {
+      var b    = document.getElementById('banner');
+      var icon = document.getElementById('bannerIcon');
+      var text = document.getElementById('bannerText');
+      b.className = 'banner ' + type + ' visible';
+      icon.textContent = type === 'success' ? '✓' : '✕';
+      text.textContent = msg;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (type === 'success') setTimeout(function() { b.classList.remove('visible'); }, 7000);
+    }
+
+    /* ── SUBMIT ── */
+    document.getElementById('submitBtn').addEventListener('click', async function() {
+      var teamName  = document.getElementById('teamName').value.trim();
+      var filmTitle = document.getElementById('filmTitle').value.trim();
+      var ytLink    = document.getElementById('ytLink').value.trim();
+
+      var missing = false;
+
+      var tnEl = document.getElementById('teamName');
+      var ftEl = document.getElementById('filmTitle');
+      var ytEl = document.getElementById('ytLink');
+      var ytRow = document.getElementById('ytRow');
+
+      if (!teamName) { tnEl.classList.add('error'); tnEl.addEventListener('input', function() { tnEl.classList.remove('error'); }, { once: true }); missing = true; }
+      if (!filmTitle) { ftEl.classList.add('error'); ftEl.addEventListener('input', function() { ftEl.classList.remove('error'); }, { once: true }); missing = true; }
+      if (!ytLink)   { ytRow.classList.add('error'); ytEl.addEventListener('input', function() { ytRow.classList.remove('error'); }, { once: true }); missing = true; }
+
+      if (missing) { showBanner('error', 'Fill in all required fields before submitting.'); return; }
+
+      var lateParticipants = [];
+      document.querySelectorAll('.participant-row').forEach(function(row) {
+        var inputs = row.querySelectorAll('input');
+        var name = inputs[0].value.trim();
+        var role = inputs[1].value.trim();
+        if (name || role) lateParticipants.push({ name: name, role: role });
+      });
+
+      var posterBase64 = '';
+      var posterName   = '';
+      if (posterFile) {
+        posterBase64 = await new Promise(function(resolve) {
+          var reader = new FileReader();
+          reader.onload = function(e) { resolve(e.target.result.split(',')[1]); };
+          reader.readAsDataURL(posterFile);
+        });
+        posterName = posterFile.name;
+      }
+
+      var btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      try {
+        var res = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            teamName:         teamName,
+            filmTitle:        filmTitle,
+            ytLink:           ytLink,
+            posterBase64:     posterBase64,
+            posterName:       posterName,
+            lateParticipants: lateParticipants
+          })
+        });
+
+        var result = await res.json();
+
+        if (result.success) {
+          showBanner('success', 'Submission received — see you at the screening.');
+          btn.textContent = 'Submitted ✓';
+        } else {
+          throw new Error(result.error || 'Unknown error');
+        }
+      } catch (err) {
+        showBanner('error', 'Something went wrong. Try again or email pow417films@gmail.com');
+        btn.disabled = false;
+        btn.textContent = 'Submit Film';
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
