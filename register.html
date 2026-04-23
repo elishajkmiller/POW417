@@ -384,6 +384,11 @@
         </div>
 
         <div class="form-block">
+          <label for="email">Your Email <span class="req">*</span></label>
+          <input type="text" id="email" name="email" placeholder="e.g. yourname@email.com" required />
+        </div>
+
+        <div class="form-block">
           <label for="teammates">Your Teammates' Names and Roles <span class="req">*</span></label>
           <textarea id="teammates" name="teammates" placeholder="e.g. John Smith — Cinematographer&#10;Alex Lee — Editor" required></textarea>
         </div>
@@ -457,13 +462,14 @@
       e.preventDefault();
 
       const nameRole   = form.nameRole.value.trim();
+      const email      = form.email.value.trim();
       const teammates  = form.teammates.value.trim();
       const teamName   = form.teamName.value.trim();
       const ackNoAI    = form.ackNoAI.checked;
       const ackSub     = form.ackSubmission.checked;
       const ackPurpose = form.ackPurpose.checked;
 
-      if (!nameRole || !teammates || !teamName) {
+      if (!nameRole || !email || !teammates || !teamName) {
         statusEl.className = 'error';
         statusEl.textContent = 'Please fill in all fields.';
         return;
@@ -479,7 +485,7 @@
       statusEl.textContent = '';
 
       try {
-        const params = new URLSearchParams({ nameRole, teammates, teamName, ackNoAI, ackSubmission: ackSub, ackPurpose });
+        const params = new URLSearchParams({ nameRole, email, teammates, teamName, ackNoAI, ackSubmission: ackSub, ackPurpose });
         await fetch(APPS_SCRIPT_URL + '?' + params.toString(), {
           method: 'GET',
           mode: 'no-cors'
