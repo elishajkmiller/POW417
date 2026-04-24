@@ -8,330 +8,167 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --dust: #DFD0CE;
-      --dust-dark: #C9B8B5;
-      --ink: #111008;
-      --ink-mid: #2C2618;
-      --red: #8C1F0E;
-      --red-light: #C43D28;
-      --warm: #E8DADA;
-      --border: rgba(17,16,8,0.15);
-      --border-mid: rgba(17,16,8,0.25);
+      --dust: #DFD0CE; --dust-dark: #C9B8B5; --ink: #111008; --ink-mid: #2C2618;
+      --red: #8C1F0E; --red-light: #C43D28; --warm: #E8DADA;
+      --border: rgba(17,16,8,0.15); --border-mid: rgba(17,16,8,0.25);
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--dust);
-      color: var(--ink);
-      font-family: 'Barlow', sans-serif;
-      font-weight: 400;
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.72;
-    }
-
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.25rem 3rem;
-      background: rgba(223, 208, 206, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-    }
-
+    body { background: var(--dust); color: var(--ink); font-family: 'Barlow', sans-serif; font-weight: 400; line-height: 1.6; min-height: 100vh; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; opacity: 0.72; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 3rem; background: rgba(223,208,206,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.4rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); text-decoration: none; flex-shrink: 0; }
+    .nav-ctas { display: flex; gap: 0.6rem; align-items: center; }
+    .nav-cta { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.5rem 1.25rem; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); text-decoration: none; transition: background 0.2s, color 0.2s; }
     .nav-cta:hover { background: var(--ink); color: var(--dust); }
-    
+    .nav-cta-filled { background: var(--ink); color: var(--dust); }
     .nav-cta-filled:hover { background: var(--ink-mid); color: var(--dust); }
-    .nav-back {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      opacity: 0.72;
-      transition: opacity 0.2s;
-    }
-    .nav-back:hover { opacity: 1; }
-
-    main {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 130px 3rem 100px;
-    }
-
-    .reg-header {
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 48px;
-      margin-bottom: 56px;
-    }
-    .eyebrow {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      opacity: 0.6;
-      margin-bottom: 1rem;
-      display: block;
-    }
-    .reg-header h1 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(4rem, 12vw, 7rem);
-      line-height: 0.88;
-      letter-spacing: -0.01em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
+    main { max-width: 720px; margin: 0 auto; padding: 130px 3rem 100px; }
+    .reg-header { border-bottom: 1px solid var(--border); padding-bottom: 48px; margin-bottom: 56px; }
+    .eyebrow { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.6; margin-bottom: 1rem; display: block; }
+    .reg-header h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(4rem, 12vw, 7rem); line-height: 0.88; letter-spacing: -0.01em; text-transform: uppercase; margin-bottom: 1.5rem; }
     .reg-header h1 span { color: var(--red); }
-    .reg-header p {
-      font-size: 0.95rem;
-      line-height: 1.8;
-      opacity: 0.82;
-      max-width: 480px;
-    }
-    .reg-header a {
-      color: var(--ink);
-      text-underline-offset: 3px;
-      opacity: 1;
-    }
-
-    .deadline {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      border: 1px solid var(--border-mid);
-      padding: 0.6rem 1rem;
-      margin-top: 1.5rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      opacity: 0.6;
-    }
-    .deadline .dot {
-      width: 6px; height: 6px;
-      background: var(--red);
-      border-radius: 50%;
-      display: inline-block;
-      animation: pulse 2s ease-in-out infinite;
-      flex-shrink: 0;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.2; }
-    }
-
+    .reg-header p { font-size: 0.95rem; line-height: 1.8; opacity: 0.82; max-width: 480px; }
+    .reg-header a { color: var(--ink); text-underline-offset: 3px; }
+    .deadline { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--border-mid); padding: 0.6rem 1rem; margin-top: 1.5rem; font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.6; }
+    .deadline .dot { width: 6px; height: 6px; background: var(--red); border-radius: 50%; display: inline-block; animation: pulse 2s ease-in-out infinite; flex-shrink: 0; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
     .form-block { margin-bottom: 2.5rem; }
-    .form-block > label {
-      display: block;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      opacity: 0.82;
-      margin-bottom: 0.6rem;
-    }
+    .form-block > label { display: block; font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.82; margin-bottom: 0.6rem; }
     .form-block > label .req { color: var(--red); margin-left: 3px; opacity: 1; }
-
-    input[type="text"],
-    textarea {
-      width: 100%;
-      background: transparent;
-      border: none;
-      border-bottom: 1.5px solid var(--border-mid);
-      color: var(--ink);
-      font-family: 'Barlow', sans-serif;
-      font-size: 1rem;
-      padding: 0.6rem 0;
-      outline: none;
-      border-radius: 0;
-      transition: border-color 0.2s;
-      -webkit-appearance: none;
-    }
-    input[type="text"]:focus,
-    textarea:focus { border-bottom-color: var(--ink); }
-    input[type="text"]::placeholder,
-    textarea::placeholder { color: rgba(17,16,8,0.2); }
+    input[type="text"], textarea { width: 100%; background: transparent; border: none; border-bottom: 1.5px solid var(--border-mid); color: var(--ink); font-family: 'Barlow', sans-serif; font-size: 1rem; padding: 0.6rem 0; outline: none; border-radius: 0; transition: border-color 0.2s; -webkit-appearance: none; }
+    input[type="text"]:focus, textarea:focus { border-bottom-color: var(--ink); }
+    input[type="text"]::placeholder, textarea::placeholder { color: rgba(17,16,8,0.2); }
     textarea { resize: vertical; min-height: 90px; }
-
-    .ack-section {
-      border-top: 1px solid var(--border);
-      padding-top: 2.5rem;
-      margin-top: 0.5rem;
-    }
-    .ack-section .section-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      opacity: 0.6;
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .ack-section .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .check-block {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      margin-bottom: 1.75rem;
-      cursor: pointer;
-    }
-    .check-block input[type="checkbox"] {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 16px;
-      height: 16px;
-      min-width: 16px;
-      border: 1.5px solid rgba(17,16,8,0.35);
-      background: transparent;
-      cursor: pointer;
-      margin-top: 3px;
-      position: relative;
-      transition: border-color 0.2s, background 0.2s;
-      border-radius: 0;
-    }
-    .check-block input[type="checkbox"]:checked {
-      background: var(--ink);
-      border-color: var(--ink);
-    }
-    .check-block input[type="checkbox"]:checked::after {
-      content: '';
-      position: absolute;
-      top: 2px; left: 4px;
-      width: 4px; height: 8px;
-      border: 1.5px solid var(--dust);
-      border-top: none;
-      border-left: none;
-      transform: rotate(45deg);
-    }
-    .check-text {
-      font-size: 0.9rem;
-      line-height: 1.7;
-      opacity: 0.85;
-      cursor: pointer;
-    }
-    .check-text strong {
-      color: var(--ink);
-      font-weight: 600;
-      opacity: 1;
-    }
-    .check-note {
-      display: block;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.08em;
-      opacity: 0.72;
-      margin-top: 0.35rem;
-      line-height: 1.6;
-    }
-
-    .submit-area {
-      border-top: 1px solid var(--border);
-      padding-top: 2.5rem;
-      margin-top: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    button[type="submit"] {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 0.75rem 2rem;
-      background: var(--ink);
-      color: var(--dust);
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-    }
+    .ack-section { border-top: 1px solid var(--border); padding-top: 2.5rem; margin-top: 0.5rem; }
+    .ack-section .section-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.6; margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; }
+    .ack-section .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .check-block { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.75rem; cursor: pointer; }
+    .check-block input[type="checkbox"] { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; min-width: 16px; border: 1.5px solid rgba(17,16,8,0.35); background: transparent; cursor: pointer; margin-top: 3px; position: relative; transition: border-color 0.2s, background 0.2s; border-radius: 0; }
+    .check-block input[type="checkbox"]:checked { background: var(--ink); border-color: var(--ink); }
+    .check-block input[type="checkbox"]:checked::after { content: ''; position: absolute; top: 2px; left: 4px; width: 4px; height: 8px; border: 1.5px solid var(--dust); border-top: none; border-left: none; transform: rotate(45deg); }
+    .check-text { font-size: 0.9rem; line-height: 1.7; opacity: 0.85; cursor: pointer; }
+    .check-text strong { color: var(--ink); font-weight: 600; opacity: 1; }
+    .check-note { display: block; font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; opacity: 0.72; margin-top: 0.35rem; line-height: 1.6; }
+    .submit-area { border-top: 1px solid var(--border); padding-top: 2.5rem; margin-top: 0.75rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    button[type="submit"] { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.75rem 2rem; background: var(--ink); color: var(--dust); border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; }
     button[type="submit"]:hover { background: var(--ink-mid); transform: translateY(-1px); }
-    button[type="submit"]:active { transform: none; }
     button[type="submit"]:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
-
-    #status {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-    }
+    #status { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; }
     #status.error { color: var(--red); }
     #status.success { color: #3a7d4f; }
-
-    #success-screen {
-      display: none;
-      padding: 80px 0;
-      text-align: center;
-    }
-    #success-screen h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(3.5rem, 10vw, 6rem);
-      text-transform: uppercase;
-      line-height: 0.9;
-      margin-bottom: 1.5rem;
-    }
+    #success-screen { display: none; padding: 80px 0; text-align: center; }
+    #success-screen h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(3.5rem, 10vw, 6rem); text-transform: uppercase; line-height: 0.9; margin-bottom: 1.5rem; }
     #success-screen h2 span { color: var(--red); }
-    #success-screen p {
-      font-size: 0.9rem;
-      opacity: 0.6;
-      line-height: 1.8;
-    }
+    #success-screen p { font-size: 0.9rem; opacity: 0.6; line-height: 1.8; }
     #success-screen a { color: var(--ink); }
-
-    footer {
-      padding: 2rem 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid var(--border);
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .footer-logo {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 1.1rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      opacity: 0.85;
-    }
+    footer { padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); gap: 1.5rem; flex-wrap: wrap; }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.1rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; }
     .footer-logo span { color: var(--red); }
-    .footer-copy {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.1em;
-      opacity: 0.3;
-    }
-
-    @media (max-width: 640px) {
-      nav { padding: 1.25rem 1.5rem; }
+    .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; opacity: 0.3; }
+    @media (max-width: 768px) {
+      nav { padding: 0.75rem 1rem; }
+      .nav-ctas { display: grid !important; grid-template-columns: 1fr 1fr; gap: 0.35rem; }
+      .nav-cta { font-size: 0.5rem !important; padding: 0.4rem 0.35rem !important; text-align: center; letter-spacing: 0.06em; }
       main { padding: 110px 1.5rem 80px; }
       footer { padding: 1.75rem 1.5rem; flex-direction: column; align-items: flex-start; }
     }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="index.html">POW<span style="color:var(--red)">4</span>17</a>
+    <div class="nav-ctas">
+      <a href="guidelines.html" class="nav-cta">Guidelines</a>
+      <a href="register.html" class="nav-cta">Register</a>
+      <a href="releases.html" class="nav-cta">Releases</a>
+      <a href="submission.html" class="nav-cta nav-cta-filled">Submit Film</a>
+    </div>
+  </nav>
+  <main>
+    <div id="form-wrapper">
+      <div class="reg-header">
+        <span class="eyebrow">004 — Registration</span>
+        <h1>POW<span>4</span>17<br>2026</h1>
+        <p>Welcome to POW417 — a no-AI, 48-hour human film gathering in Springfield, MO.<br><br>
+        Read the full guidelines <a href="guidelines.html">here</a> and follow us on Instagram <a href="https://instagram.com/pow417films" target="_blank">@pow417films</a>.<br><br>
+        Only one member per team needs to register.</p>
+        <div class="deadline"><span class="dot"></span>Registration closes — 3:00 PM, April 24, 2026</div>
+      </div>
+      <form id="reg-form" novalidate>
+        <div class="form-block">
+          <label for="name-role">Your Name and Role <span class="req">*</span></label>
+          <input type="text" id="name-role" name="nameRole" placeholder="e.g. Jane Doe — Director" required />
+        </div>
+        <div class="form-block">
+          <label for="email">Your Email <span class="req">*</span></label>
+          <input type="text" id="email" name="email" placeholder="e.g. yourname@email.com" required />
+        </div>
+        <div class="form-block">
+          <label for="teammates">Your Teammates' Names and Roles <span class="req">*</span></label>
+          <textarea id="teammates" name="teammates" placeholder="e.g. John Smith — Cinematographer&#10;Alex Lee — Editor" required></textarea>
+        </div>
+        <div class="form-block">
+          <label for="team-name">Your Team Name <span class="req">*</span></label>
+          <input type="text" id="team-name" name="teamName" placeholder="e.g. Midnight Crew" required />
+        </div>
+        <div class="ack-section">
+          <div class="section-label">Acknowledgements</div>
+          <label class="check-block">
+            <input type="checkbox" name="ackNoAI" required />
+            <span class="check-text"><strong>I acknowledge that no AI may be used in any capacity</strong> in the production of my film — including scripts, images, voice, music, visual effects, or any generative AI tool at any stage of production.</span>
+          </label>
+          <label class="check-block">
+            <input type="checkbox" name="ackSubmission" required />
+            <span class="check-text"><strong>I acknowledge that I must submit my film via the POW417 website within the 48-hour time frame</strong> to be considered an official entry in POW417 2026.
+            <span class="check-note">Films submitted late will still be screened but are not official entries.</span></span>
+          </label>
+          <label class="check-block">
+            <input type="checkbox" name="ackPurpose" required />
+            <span class="check-text"><strong>I acknowledge that the purpose of this challenge is to foster human creativity, connect local artists, and have fun.</strong>
+            <span class="check-note">By submitting your film you consent to it being played at the POW417 2026 public screening event.</span></span>
+          </label>
+        </div>
+        <div class="submit-area">
+          <button type="submit" id="submit-btn">Register Your Team</button>
+          <span id="status"></span>
+        </div>
+      </form>
+    </div>
+    <div id="success-screen">
+      <h2>You're<br><span>In.</span></h2>
+      <p>Registration received for <strong id="success-team"></strong>.<br><br>
+      Watch Instagram <a href="https://instagram.com/pow417films" target="_blank">@pow417films</a> for opening ceremony details.<br>See you on 4/25.</p>
+    </div>
+  </main>
+  <footer>
+    <div class="footer-logo">POW<span>4</span>17</div>
+    <p class="footer-copy">POW417 — Proof of Work — Springfield, MO — Human Films Only</p>
+  </footer>
+  <script>
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZ_RmLjYX1YjIAoyZWHEP8-RrMb8DWClQQOAP-P8qoiu9HKbD7PqnocZDjZGpgZrvy/exec';
+    const form = document.getElementById('reg-form');
+    const btn  = document.getElementById('submit-btn');
+    const statusEl = document.getElementById('status');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const nameRole = form.nameRole.value.trim(), email = form.email.value.trim();
+      const teammates = form.teammates.value.trim(), teamName = form.teamName.value.trim();
+      const ackNoAI = form.ackNoAI.checked, ackSub = form.ackSubmission.checked, ackPurpose = form.ackPurpose.checked;
+      if (!nameRole || !email || !teammates || !teamName) { statusEl.className='error'; statusEl.textContent='Please fill in all fields.'; return; }
+      if (!ackNoAI || !ackSub || !ackPurpose) { statusEl.className='error'; statusEl.textContent='Please check all acknowledgements.'; return; }
+      btn.disabled = true; btn.textContent = 'Sending...'; statusEl.textContent = '';
+      try {
+        const params = new URLSearchParams({ nameRole, email, teammates, teamName, ackNoAI, ackSubmission: ackSub, ackPurpose });
+        await fetch(APPS_SCRIPT_URL + '?' + params.toString(), { method: 'GET', mode: 'no-cors' });
+        document.getElementById('form-wrapper').style.display = 'none';
+        document.getElementById('success-screen').style.display = 'block';
+        document.getElementById('success-team').textContent = teamName;
+      } catch (err) {
+        btn.disabled = false; btn.textContent = 'Register Your Team';
+        statusEl.className = 'error'; statusEl.textContent = 'Something went wrong. Try again or email pow417films@gmail.com.';
+      }
+    });
+  </script>
+</body>
+</html>
