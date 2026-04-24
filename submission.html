@@ -42,6 +42,32 @@
       opacity: 0.72;
     }
 
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: transparent;
+      transition: background 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(234,224,216,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
     .nav-links {
       display: flex;
       gap: 2.5rem;
@@ -59,6 +85,11 @@
     }
     .nav-links a:hover { opacity: 1; }
     .nav-links a.active { opacity: 1; border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
+    .nav-ctas { display: flex; gap: 0.6rem; align-items: center; }
+    .nav-cta { font-family: "Space Mono", monospace; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.5rem 1.25rem; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); text-decoration: none; transition: background 0.2s, color 0.2s; }
+    .nav-cta:hover { background: var(--ink); color: var(--dust); }
+    .nav-cta-filled { background: var(--ink); color: var(--dust); }
+    .nav-cta-filled:hover { background: var(--ink-mid); color: var(--dust); }
 
     /* PAGE HEADER */
     .page-header {
@@ -565,6 +596,7 @@
 
     @media (max-width: 768px) {
       nav { padding: 1.25rem 1.5rem; }
+      .nav-links { display: none; }
       .page-header { padding: 7rem 1.5rem 3rem; }
       .deadline-banner { padding: 0.75rem 1.5rem; }
       .form-body { padding: 3rem 1.5rem 5rem; }
@@ -574,6 +606,130 @@
       .participant-row { grid-template-columns: 1fr auto; }
       .participant-row .p-field:nth-child(2) { grid-column: 1; }
     }
+
+    @media (max-width: 768px) {
+      nav { padding: 0.75rem 1rem; }
+      .nav-ctas { display: grid !important; grid-template-columns: 1fr 1fr; gap: 0.35rem; }
+      .nav-cta { font-size: 0.5rem !important; padding: 0.4rem 0.35rem !important; text-align: center; letter-spacing: 0.06em; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+    <nav id="nav">
+    <a class="nav-logo" href="index.html">POW<span style="color:var(--red)">4</span>17</a>
+    <div class="nav-ctas">
+      <a href="guidelines.html" class="nav-cta">Guidelines</a>
+      <a href="register.html" class="nav-cta">Register</a>
+      <a href="releases.html" class="nav-cta">Releases</a>
+      <a href="submission.html" class="nav-cta nav-cta-filled">Submit Film</a>
+    </div>
+  </nav>
+
+  <!-- BANNER (success/error) -->
+  <div class="banner" id="banner">
+    <span class="banner-icon" id="bannerIcon"></span>
+    <span id="bannerText"></span>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="page-header-bg" aria-hidden="true">Submit</div>
+    <span class="page-header-eyebrow reveal">005 — Final Submission</span>
+    <h1 class="page-header-title reveal reveal-delay-1">Deliver<br>Your Film</h1>
+    <p class="page-header-sub reveal reveal-delay-2">You made it. Now get it in. Fill out everything below before the clock hits zero.</p>
+  </header>
+
+  <!-- DEADLINE BANNER -->
+  <div class="deadline-banner">
+    <span class="deadline-label">Submission Deadline</span>
+    <span class="deadline-val">Sunday — 48 Hours After Kickoff</span>
+    <span class="deadline-note">Late submissions will be screened but are not official entries</span>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-body">
+
+    <!-- FILM IDENTITY -->
+    <div class="section-label reveal">001 — Film Identity</div>
+    <div class="form-grid">
+      <div class="field reveal">
+        <label for="teamName">Team Name</label>
+        <input id="teamName" type="text" placeholder="Your crew's name" />
+      </div>
+      <div class="field reveal reveal-delay-1">
+        <label for="filmTitle">Film Title</label>
+        <input id="filmTitle" type="text" placeholder="What did you call it?" />
+      </div>
+    </div>
+
+    <!-- FILM LINK -->
+    <div class="section-label reveal">002 — Film Link</div>
+    <div class="yt-wrap reveal reveal-delay-1">
+      <div class="yt-input-row" id="ytRow">
+        <span class="yt-glyph">YT —</span>
+        <input id="ytLink" type="url" placeholder="https://youtu.be/..." />
+      </div>
+      <p class="yt-note">
+        Must be set to <strong>Unlisted</strong> on YouTube before submitting.<br>
+        Public links will not be accepted. Private links cannot be screened.
+      </p>
+    </div>
+
+    <!-- POSTER -->
+    <div class="section-label reveal">003 — Film Poster</div>
+    <div class="poster-wrap reveal reveal-delay-1">
+      <div class="poster-zone" id="posterZone">
+        <input type="file" id="posterInput" accept="image/png,image/jpeg" />
+        <div class="poster-zone-label">Drop Poster Here or Click to Browse</div>
+        <div class="poster-zone-sub">PNG or JPEG &middot; Max 10 MB</div>
+      </div>
+      <div class="poster-preview" id="posterPreview">
+        <img id="posterThumb" src="" alt="Poster preview" />
+        <div class="poster-preview-info">
+          <div class="poster-preview-name" id="posterFileName"></div>
+          <div class="poster-preview-size" id="posterFileSize"></div>
+        </div>
+        <button class="remove-btn" id="removePoster">Remove</button>
+      </div>
+    </div>
+
+    <!-- LATE PARTICIPANTS -->
+    <div class="section-label reveal">004 — Late Additions</div>
+    <div class="participants-wrap reveal reveal-delay-1">
+      <p class="participant-notice">
+        Only list participants who joined after registration closed.<br>
+        These entries will be reviewed by staff before the screening.
+      </p>
+      <div class="participants-list" id="participantsList"></div>
+      <button class="add-participant-btn" id="addParticipantBtn">Add another participant</button>
+    </div>
+
+  </div>
+
+  <!-- SUBMIT SECTION -->
+  <div class="submit-section">
+    <div class="submit-left">
+      <p class="submit-eyebrow">005 — Lock It In</p>
+      <h2 class="submit-headline">That's<br>a Wrap.</h2>
+      <p class="submit-note">By submitting you confirm all content is original, made within the 48-hour window, and free of AI-generated material — per POW417 rules.</p>
+    </div>
+    <button class="submit-btn" id="submitBtn">Submit Film</button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html" class="footer-logo">POW<span style="color:var(--red)">4</span>17</a>
+    <p class="footer-copy">POW417 — Proof of Work — Springfield, MO — Human Films Only</p>
+  </footer>
+
+  <script>
+    // ================================================================
+    //  PASTE YOUR APPS SCRIPT WEB APP URL BELOW
+    // ================================================================
+    var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZ_RmLjYX1YjIAoyZWHEP8-RrMb8DWClQQOAP-P8qoiu9HKbD7PqnocZDjZGpgZrvy/exec';
+    // ================================================================
 
     /* ── NAV SCROLL ── */
     var nav = document.getElementById('nav');
