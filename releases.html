@@ -27,18 +27,18 @@
     .notice-banner { background: var(--ink); color: var(--dust); padding: 0.75rem 3rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
     .notice-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.4; flex-shrink: 0; }
     .notice-text { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.75; line-height: 1.7; }
-    .releases-body { padding: 5rem 3rem 7rem; max-width: 960px; }
-    .section-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.6; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
-    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .releases-grid { display: flex; flex-direction: column; gap: 0; }
-    .release-item { display: grid; grid-template-columns: 48px 1fr auto; gap: 2rem; align-items: center; padding: 2.25rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--ink); transition: background 0.2s; }
-    .release-item:first-child { border-top: 1px solid var(--border); }
-    .release-item:hover .release-arrow { transform: translateX(4px); opacity: 1; }
-    .release-item:hover .release-title { color: var(--red); }
-    .release-num { font-family: 'Space Mono', monospace; font-size: 0.6rem; opacity: 0.3; letter-spacing: 0.1em; }
-    .release-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.2rem); text-transform: uppercase; letter-spacing: 0.04em; line-height: 1; margin-bottom: 0.4rem; transition: color 0.2s; }
-    .release-desc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.5; text-transform: uppercase; line-height: 1.6; }
-    .release-arrow { font-size: 1.4rem; opacity: 0.25; transition: transform 0.2s, opacity 0.2s; flex-shrink: 0; }
+    .coming-soon { padding: 7rem 3rem; max-width: 860px; }
+    .coming-soon-inner { border: 1px solid var(--border); padding: 4rem; background: var(--warm); }
+    .coming-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.5; margin-bottom: 1.5rem; display: block; }
+    .coming-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2.5rem, 6vw, 4.5rem); text-transform: uppercase; line-height: 0.88; letter-spacing: -0.01em; margin-bottom: 1.5rem; }
+    .coming-headline span { color: var(--red); }
+    .coming-body { font-size: 1rem; line-height: 1.8; opacity: 0.75; max-width: 520px; }
+    .coming-body p + p { margin-top: 1rem; }
+    .coming-divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+    .coming-detail { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; }
+    .coming-detail-item { }
+    .coming-detail-label { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.45; margin-bottom: 0.4rem; }
+    .coming-detail-val { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em; }
     .footer-note { background: var(--warm); border-top: 1px solid var(--border); padding: 3rem; display: grid; grid-template-columns: 48px 1fr; gap: 2rem; align-items: start; max-width: 860px; }
     .footer-note-num { font-family: 'Space Mono', monospace; font-size: 0.6rem; opacity: 0.3; padding-top: 0.2rem; }
     .footer-note-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
@@ -52,9 +52,8 @@
       .nav-cta { font-size: 0.5rem !important; padding: 0.4rem 0.35rem !important; text-align: center; letter-spacing: 0.06em; }
       .page-header { padding: 7rem 1.5rem 3rem; }
       .notice-banner { padding: 0.75rem 1.5rem; }
-      .releases-body { padding: 3rem 1.5rem 5rem; }
-      .release-item { grid-template-columns: 32px 1fr auto; gap: 1rem; padding: 1.75rem 0; }
-      .footer-note { padding: 2rem 1.5rem; }
+      .coming-soon { padding: 3rem 1.5rem 5rem; }
+      .coming-soon-inner { padding: 2.5rem 1.5rem; }
       footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
     }
   </style>
@@ -63,7 +62,6 @@
   <nav>
     <a class="nav-logo" href="index.html">POW<span style="color:var(--red)">4</span>17</a>
     <div class="nav-ctas">
-      <a href="guidelines.html" class="nav-cta">Guidelines</a>
       <a href="register.html" class="nav-cta">Register</a>
       <a href="releases.html" class="nav-cta">Releases</a>
       <a href="submission.html" class="nav-cta nav-cta-filled">Submit Film</a>
@@ -73,47 +71,42 @@
     <div class="page-header-bg" aria-hidden="true">Release</div>
     <span class="page-header-eyebrow">006 — Release Forms</span>
     <h1 class="page-header-title">Releases</h1>
-    <p class="page-header-sub">Every person, place, and track in your film needs a release. Fill these out during production — don't wait until the deadline.</p>
+    <p class="page-header-sub">Release forms will be available at the opening event. Fill them out before production begins.</p>
   </header>
   <div class="notice-banner">
-    <span class="notice-label">Required</span>
-    <span class="notice-text">All applicable releases must be completed before your film is eligible for screening.</span>
+    <span class="notice-label">Heads Up</span>
+    <span class="notice-text">Release forms are distributed at the opening event — bring a pen.</span>
   </div>
-  <div class="releases-body">
-    <div class="section-label">Complete All That Apply</div>
-    <div class="releases-grid">
-      <a class="release-item" href="https://docs.google.com/forms/d/e/1FAIpQLScrj4PiGZvGO-1GwoJw8pKph10TbWPxVVtI8ByPHJKvuNpANg/viewform?usp=share_link&ouid=113455481818146962943" target="_blank">
-        <div class="release-num">01</div>
-        <div class="release-info"><div class="release-title">Crew Release</div><div class="release-desc">Everyone behind the camera — directors, editors, crew members</div></div>
-        <div class="release-arrow">→</div>
-      </a>
-      <a class="release-item" href="https://docs.google.com/forms/d/e/1FAIpQLSeSWzttL_2gFjAW8M_eZMdDhEUe3vkWO0QSSoFQoWfsXM6kPA/viewform?usp=share_link&ouid=113455481818146962943" target="_blank">
-        <div class="release-num">02</div>
-        <div class="release-info"><div class="release-title">Cast Release</div><div class="release-desc">Anyone who appears on screen in your film</div></div>
-        <div class="release-arrow">→</div>
-      </a>
-      <a class="release-item" href="https://docs.google.com/forms/d/e/1FAIpQLSdUHudLsTsiJpuJpRFekUIlSsXS5-bvW-9oYiJS9oDRzVD6XQ/viewform?usp=share_link&ouid=113455481818146962943" target="_blank">
-        <div class="release-num">03</div>
-        <div class="release-info"><div class="release-title">Minor Release</div><div class="release-desc">Any participant under 18 — requires parent or guardian signature</div></div>
-        <div class="release-arrow">→</div>
-      </a>
-      <a class="release-item" href="https://docs.google.com/forms/d/e/1FAIpQLScKyoukiqECMeCbZS7VRTK1mjMaaDgdujRoo8d4AHcHDaMYxQ/viewform?usp=share_link&ouid=113455481818146962943" target="_blank">
-        <div class="release-num">04</div>
-        <div class="release-info"><div class="release-title">Music Release</div><div class="release-desc">Any original or licensed music used in your film's soundtrack</div></div>
-        <div class="release-arrow">→</div>
-      </a>
-      <a class="release-item" href="https://docs.google.com/forms/d/e/1FAIpQLSf1FxZlFqehxJz02PWNa_l3FOwQPYBNzFPafTTWS_fiARHK3A/viewform?usp=sharing&ouid=113455481818146962943" target="_blank">
-        <div class="release-num">05</div>
-        <div class="release-info"><div class="release-title">Location Release</div><div class="release-desc">Any private property, business, or venue used as a filming location</div></div>
-        <div class="release-arrow">→</div>
-      </a>
+  <div class="coming-soon">
+    <div class="coming-soon-inner">
+      <span class="coming-eyebrow">006 — Release Forms</span>
+      <h2 class="coming-headline">Forms Available<br>at the <span>Opening.</span></h2>
+      <div class="coming-body">
+        <p>Release forms will be handed out at the opening event on April 25. Pick them up when you arrive, fill them out before you start rolling, and return them with your film submission.</p>
+        <p>You'll need a release for every person on screen, every location you shoot, and any music you use. When in doubt, fill it out.</p>
+      </div>
+      <div class="coming-divider"></div>
+      <div class="coming-detail">
+        <div class="coming-detail-item">
+          <div class="coming-detail-label">Available</div>
+          <div class="coming-detail-val">Opening Event — Apr 25</div>
+        </div>
+        <div class="coming-detail-item">
+          <div class="coming-detail-label">Due With</div>
+          <div class="coming-detail-val">Film Submission</div>
+        </div>
+        <div class="coming-detail-item">
+          <div class="coming-detail-label">Questions</div>
+          <div class="coming-detail-val"><a href="mailto:pow417films@gmail.com" style="color:var(--ink);">pow417films@gmail.com</a></div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="footer-note">
     <div class="footer-note-num">※</div>
     <div>
-      <div class="footer-note-title">Not Sure Which Ones You Need?</div>
-      <div class="footer-note-body">If you shot on someone's property — location release. If someone is on screen — cast release. If anyone is under 18 — minor release. If there's music — music release. Everyone on your crew — crew release. When in doubt, fill it out.</div>
+      <div class="footer-note-title">What Releases Will You Need?</div>
+      <div class="footer-note-body">If you shoot on someone's property — location release. If someone is on screen — cast release. If anyone is under 18 — minor release. If there's music — music release. Everyone on your crew — crew release. When in doubt, fill it out.</div>
     </div>
   </div>
   <footer>
