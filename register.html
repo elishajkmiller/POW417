@@ -42,7 +42,6 @@
       opacity: 0.72;
     }
 
-    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -76,14 +75,12 @@
     }
     .nav-back:hover { opacity: 1; }
 
-    /* LAYOUT */
     main {
       max-width: 720px;
       margin: 0 auto;
       padding: 130px 3rem 100px;
     }
 
-    /* HEADER */
     .reg-header {
       border-bottom: 1px solid var(--border);
       padding-bottom: 48px;
@@ -120,7 +117,6 @@
       opacity: 1;
     }
 
-    /* DEADLINE */
     .deadline {
       display: inline-flex;
       align-items: center;
@@ -147,7 +143,6 @@
       50% { opacity: 0.2; }
     }
 
-    /* FORM FIELDS */
     .form-block { margin-bottom: 2.5rem; }
     .form-block > label {
       display: block;
@@ -181,7 +176,6 @@
     textarea::placeholder { color: rgba(17,16,8,0.2); }
     textarea { resize: vertical; min-height: 90px; }
 
-    /* ACKNOWLEDGEMENTS */
     .ack-section {
       border-top: 1px solid var(--border);
       padding-top: 2.5rem;
@@ -261,7 +255,6 @@
       line-height: 1.6;
     }
 
-    /* SUBMIT */
     .submit-area {
       border-top: 1px solid var(--border);
       padding-top: 2.5rem;
@@ -296,7 +289,6 @@
     #status.error { color: var(--red); }
     #status.success { color: #3a7d4f; }
 
-    /* SUCCESS */
     #success-screen {
       display: none;
       padding: 80px 0;
@@ -318,7 +310,6 @@
     }
     #success-screen a { color: var(--ink); }
 
-    /* FOOTER */
     footer {
       padding: 2rem 3rem;
       display: flex;
@@ -354,8 +345,8 @@
 <body>
 
   <nav>
-    <a class="nav-logo" href="https://pow417.com">POW<span style="color:var(--red)">4</span>17</a>
-    <a class="nav-back" href="https://pow417.com">← Back to Site</a>
+    <a class="nav-logo" href="index.html">POW<span style="color:var(--red)">4</span>17</a>
+    <a class="nav-back" href="index.html">← Back to Site</a>
   </nav>
 
   <main>
@@ -367,7 +358,7 @@
         <h1>POW<span>4</span>17<br>2026</h1>
         <p>
           Welcome to POW417 — a no-AI, 48-hour human film gathering in Springfield, MO.<br><br>
-          Read the full guidelines <a href="guidelines.html" id="guidelines-link">here</a> and follow us on Instagram <a href="https://instagram.com/pow417films" target="_blank">@pow417films</a>.<br><br>
+          Read the full guidelines <a href="guidelines.html">here</a> and follow us on Instagram <a href="https://instagram.com/pow417films" target="_blank">@pow417films</a>.<br><br>
           Only one member per team needs to register.
         </p>
         <div class="deadline">
@@ -411,7 +402,7 @@
           <label class="check-block">
             <input type="checkbox" name="ackSubmission" required />
             <span class="check-text">
-              <strong>I acknowledge that I must submit my film via email within the 48-hour time frame</strong> to be considered an official part of POW417 2026.
+              <strong>I acknowledge that I must submit my film via the POW417 website within the 48-hour time frame</strong> to be considered an official entry in POW417 2026.
               <span class="check-note">Films submitted late will still be screened but are not official entries.</span>
             </span>
           </label>
