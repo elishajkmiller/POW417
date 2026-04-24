@@ -61,22 +61,7 @@
       color: var(--ink);
       text-decoration: none;
     }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      opacity: 0.72;
-      transition: opacity 0.2s;
-    }
-    .nav-links a:hover { opacity: 1; }
+    .nav-ctas { display: flex; gap: 0.6rem; align-items: center; }
     .nav-cta {
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
@@ -90,6 +75,8 @@
       transition: background 0.2s, color 0.2s;
     }
     .nav-cta:hover { background: var(--ink); color: var(--dust); }
+    .nav-cta-filled { background: var(--ink); color: var(--dust); }
+    .nav-cta-filled:hover { background: var(--ink-mid); color: var(--dust); }
 
     /* LAYOUT */
     main {
@@ -128,29 +115,6 @@
       opacity: 0.72;
       font-family: 'Space Mono', monospace;
       letter-spacing: 0.05em;
-    }
-
-    /* LIVE BADGE */
-    .live-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      opacity: 0.82;
-      margin-top: 1rem;
-    }
-    .live-dot {
-      width: 6px; height: 6px;
-      background: #3a7d4f;
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.2; }
     }
 
     /* DOC EMBED */
@@ -194,7 +158,6 @@
 
     @media (max-width: 640px) {
       nav { padding: 1.25rem 1.5rem; }
-      .nav-links { display: none; }
       main { padding: 110px 1.5rem 80px; }
       footer { padding: 1.75rem 1.5rem; flex-direction: column; align-items: flex-start; }
       .doc-wrap iframe { height: 70vh; }
@@ -204,12 +167,13 @@
 <body>
 
   <nav>
-    <a class="nav-logo" href="https://pow417.com">POW<span style="color:var(--red)">4</span>17</a>
-    <ul class="nav-links">
-      <li><a href="https://pow417.com/#about">About</a></li>
-      <li><a href="guidelines.html" style="opacity:1;">Guidelines</a></li>
-    </ul>
-    <a href="register.html" class="nav-cta">Register</a>
+    <a class="nav-logo" href="index.html">POW<span style="color:var(--red)">4</span>17</a>
+    <div class="nav-ctas">
+      <a href="guidelines.html" class="nav-cta">Guidelines</a>
+      <a href="register.html" class="nav-cta">Register</a>
+      <a href="releases.html" class="nav-cta">Releases</a>
+      <a href="submission.html" class="nav-cta nav-cta-filled">Submit Film</a>
+    </div>
   </nav>
 
   <main>
