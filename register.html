@@ -63,6 +63,7 @@
       color: var(--ink);
       text-decoration: none;
     }
+    .nav-ctas { display: flex; gap: 0.6rem; align-items: center; }
     .nav-back {
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
@@ -346,7 +347,12 @@
 
   <nav>
     <a class="nav-logo" href="index.html">POW<span style="color:var(--red)">4</span>17</a>
-    <a class="nav-back" href="index.html">← Back to Site</a>
+    <div class="nav-ctas">
+      <a href="guidelines.html" class="nav-cta">Guidelines</a>
+      <a href="register.html" class="nav-cta">Register</a>
+      <a href="releases.html" class="nav-cta">Releases</a>
+      <a href="submission.html" class="nav-cta nav-cta-filled">Submit Film</a>
+    </div>
   </nav>
 
   <main>
