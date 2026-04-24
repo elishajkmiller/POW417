@@ -3,303 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>POW417 — Releases</title>
+  <title>Releases — POW417</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --dust: #DFD0CE;
-      --dust-dark: #C9B8B5;
-      --ink: #111008;
-      --ink-mid: #2C2618;
-      --red: #8C1F0E;
-      --red-light: #C43D28;
-      --warm: #E8DADA;
-      --border: rgba(17,16,8,0.15);
-    }
-
+    :root { --dust: #DFD0CE; --dust-dark: #C9B8B5; --ink: #111008; --ink-mid: #2C2618; --red: #8C1F0E; --red-light: #C43D28; --warm: #E8DADA; --border: rgba(17,16,8,0.15); }
     html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--dust);
-      color: var(--ink);
-      font-family: 'Barlow', sans-serif;
-      font-weight: 400;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* GRAIN */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.72;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      opacity: 0.6;
-      transition: opacity 0.2s;
-    }
-    .nav-links a:hover { opacity: 1; }
-    .nav-links a.active { opacity: 1; border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
-
+    body { background: var(--dust); color: var(--ink); font-family: 'Barlow', sans-serif; font-weight: 400; line-height: 1.6; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; opacity: 0.72; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 3rem; background: rgba(223,208,206,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.4rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); text-decoration: none; flex-shrink: 0; }
+    .nav-ctas { display: flex; gap: 0.6rem; align-items: center; }
+    .nav-cta { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.5rem 1.25rem; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); text-decoration: none; transition: background 0.2s, color 0.2s; cursor: pointer; }
     .nav-cta:hover { background: var(--ink); color: var(--dust); }
-    
+    .nav-cta-filled { background: var(--ink); color: var(--dust); }
     .nav-cta-filled:hover { background: var(--ink-mid); color: var(--dust); }
-
-    /* PAGE HEADER */
-    .page-header {
-      padding: 10rem 3rem 5rem;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-    .page-header-eyebrow {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      opacity: 0.55;
-      margin-bottom: 0.75rem;
-      display: block;
-    }
-    .page-header-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(4rem, 14vw, 11rem);
-      line-height: 0.85;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-    }
-    .page-header-sub {
-      margin-top: 1.5rem;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 300;
-      font-size: clamp(1rem, 2vw, 1.4rem);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      opacity: 0.65;
-      max-width: 580px;
-      line-height: 1.4;
-    }
-    .page-header-bg {
-      position: absolute;
-      top: 50%;
-      right: -1rem;
-      transform: translateY(-50%);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 18vw;
-      text-transform: uppercase;
-      opacity: 0.04;
-      letter-spacing: -0.04em;
-      pointer-events: none;
-      user-select: none;
-      white-space: nowrap;
-      line-height: 1;
-    }
-
-    /* NOTICE BANNER */
-    .notice-banner {
-      background: var(--ink);
-      color: var(--dust);
-      padding: 0.75rem 3rem;
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .notice-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      opacity: 0.4;
-      flex-shrink: 0;
-    }
-    .notice-text {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      opacity: 0.75;
-      line-height: 1.7;
-    }
-
-    /* RELEASES BODY */
-    .releases-body {
-      padding: 5rem 3rem 7rem;
-      max-width: 960px;
-    }
-
-    .section-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      opacity: 0.6;
-      margin-bottom: 2.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* RELEASE CARDS */
-    .releases-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .release-item {
-      display: grid;
-      grid-template-columns: 48px 1fr auto;
-      gap: 2rem;
-      align-items: center;
-      padding: 2.25rem 0;
-      border-bottom: 1px solid var(--border);
-      text-decoration: none;
-      color: var(--ink);
-      transition: background 0.2s;
-      animation: fadeUp 0.5s ease both;
-    }
-
+    .page-header { padding: 10rem 3rem 5rem; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .page-header-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.55; margin-bottom: 0.75rem; display: block; }
+    .page-header-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(4rem, 14vw, 11rem); line-height: 0.85; letter-spacing: -0.02em; text-transform: uppercase; }
+    .page-header-sub { margin-top: 1.5rem; font-family: 'Barlow Condensed', sans-serif; font-weight: 300; font-size: clamp(1rem, 2vw, 1.4rem); letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.65; max-width: 580px; line-height: 1.4; }
+    .page-header-bg { position: absolute; top: 50%; right: -1rem; transform: translateY(-50%); font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 18vw; text-transform: uppercase; opacity: 0.04; letter-spacing: -0.04em; pointer-events: none; user-select: none; white-space: nowrap; line-height: 1; }
+    .notice-banner { background: var(--ink); color: var(--dust); padding: 0.75rem 3rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .notice-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.4; flex-shrink: 0; }
+    .notice-text { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.75; line-height: 1.7; }
+    .releases-body { padding: 5rem 3rem 7rem; max-width: 960px; }
+    .section-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.6; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .releases-grid { display: flex; flex-direction: column; gap: 0; }
+    .release-item { display: grid; grid-template-columns: 48px 1fr auto; gap: 2rem; align-items: center; padding: 2.25rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--ink); transition: background 0.2s; }
     .release-item:first-child { border-top: 1px solid var(--border); }
-
     .release-item:hover .release-arrow { transform: translateX(4px); opacity: 1; }
     .release-item:hover .release-title { color: var(--red); }
-
-    .release-num {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      opacity: 0.3;
-      letter-spacing: 0.1em;
-    }
-
-    .release-info {}
-
-    .release-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      line-height: 1;
-      margin-bottom: 0.4rem;
-      transition: color 0.2s;
-    }
-
-    .release-desc {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      opacity: 0.5;
-      text-transform: uppercase;
-      line-height: 1.6;
-    }
-
-    .release-arrow {
-      font-size: 1.4rem;
-      opacity: 0.25;
-      transition: transform 0.2s, opacity 0.2s;
-      flex-shrink: 0;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .release-item:nth-child(1) { animation-delay: 0.05s; }
-    .release-item:nth-child(2) { animation-delay: 0.1s; }
-    .release-item:nth-child(3) { animation-delay: 0.15s; }
-    .release-item:nth-child(4) { animation-delay: 0.2s; }
-    .release-item:nth-child(5) { animation-delay: 0.25s; }
-
-    /* FOOTER NOTE */
-    .footer-note {
-      background: var(--warm);
-      border-top: 1px solid var(--border);
-      padding: 3rem;
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 2rem;
-      align-items: start;
-      max-width: 860px;
-    }
-    .footer-note-num {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      opacity: 0.3;
-      padding-top: 0.2rem;
-    }
-    .footer-note-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 1.2rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 0.5rem;
-    }
-    .footer-note-body {
-      font-size: 0.875rem;
-      opacity: 0.65;
-      line-height: 1.7;
-      max-width: 560px;
-    }
-
-    /* FOOTER */
-    footer {
-      padding: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid var(--border);
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .footer-logo {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 1.25rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      opacity: 0.8;
-      text-decoration: none;
-      color: var(--ink);
-    }
-    .footer-copy {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      opacity: 0.3;
-    }
-
+    .release-num { font-family: 'Space Mono', monospace; font-size: 0.6rem; opacity: 0.3; letter-spacing: 0.1em; }
+    .release-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.2rem); text-transform: uppercase; letter-spacing: 0.04em; line-height: 1; margin-bottom: 0.4rem; transition: color 0.2s; }
+    .release-desc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.5; text-transform: uppercase; line-height: 1.6; }
+    .release-arrow { font-size: 1.4rem; opacity: 0.25; transition: transform 0.2s, opacity 0.2s; flex-shrink: 0; }
+    .footer-note { background: var(--warm); border-top: 1px solid var(--border); padding: 3rem; display: grid; grid-template-columns: 48px 1fr; gap: 2rem; align-items: start; max-width: 860px; }
+    .footer-note-num { font-family: 'Space Mono', monospace; font-size: 0.6rem; opacity: 0.3; padding-top: 0.2rem; }
+    .footer-note-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+    .footer-note-body { font-size: 0.875rem; opacity: 0.65; line-height: 1.7; max-width: 560px; }
+    footer { padding: 3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); gap: 2rem; flex-wrap: wrap; }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.25rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; text-decoration: none; color: var(--ink); }
+    .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.3; }
     @media (max-width: 768px) {
-      nav { padding: 1.25rem 1.5rem; }
+      nav { padding: 0.75rem 1rem; }
+      .nav-ctas { display: grid !important; grid-template-columns: 1fr 1fr; gap: 0.35rem; }
+      .nav-cta { font-size: 0.5rem !important; padding: 0.4rem 0.35rem !important; text-align: center; letter-spacing: 0.06em; }
       .page-header { padding: 7rem 1.5rem 3rem; }
       .notice-banner { padding: 0.75rem 1.5rem; }
       .releases-body { padding: 3rem 1.5rem 5rem; }
@@ -307,3 +57,68 @@
       .footer-note { padding: 2rem 1.5rem; }
       footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
     }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="index.html">POW<span style="color:var(--red)">4</span>17</a>
+    <div class="nav-ctas">
+      <a href="guidelines.html" class="nav-cta">Guidelines</a>
+      <a href="register.html" class="nav-cta">Register</a>
+      <a href="releases.html" class="nav-cta">Releases</a>
+      <a href="submission.html" class="nav-cta nav-cta-filled">Submit Film</a>
+    </div>
+  </nav>
+  <header class="page-header">
+    <div class="page-header-bg" aria-hidden="true">Release</div>
+    <span class="page-header-eyebrow">006 — Release Forms</span>
+    <h1 class="page-header-title">Releases</h1>
+    <p class="page-header-sub">Every person, place, and track in your film needs a release. Fill these out during production — don't wait until the deadline.</p>
+  </header>
+  <div class="notice-banner">
+    <span class="notice-label">Required</span>
+    <span class="notice-text">All applicable releases must be completed before your film is eligible for screening.</span>
+  </div>
+  <div class="releases-body">
+    <div class="section-label">Complete All That Apply</div>
+    <div class="releases-grid">
+      <a class="release-item" href="https://docs.google.com/forms/d/e/1FAIpQLScrj4PiGZvGO-1GwoJw8pKph10TbWPxVVtI8ByPHJKvuNpANg/viewform?usp=share_link&ouid=113455481818146962943" target="_blank">
+        <div class="release-num">01</div>
+        <div class="release-info"><div class="release-title">Crew Release</div><div class="release-desc">Everyone behind the camera — directors, editors, crew members</div></div>
+        <div class="release-arrow">→</div>
+      </a>
+      <a class="release-item" href="https://docs.google.com/forms/d/e/1FAIpQLSeSWzttL_2gFjAW8M_eZMdDhEUe3vkWO0QSSoFQoWfsXM6kPA/viewform?usp=share_link&ouid=113455481818146962943" target="_blank">
+        <div class="release-num">02</div>
+        <div class="release-info"><div class="release-title">Cast Release</div><div class="release-desc">Anyone who appears on screen in your film</div></div>
+        <div class="release-arrow">→</div>
+      </a>
+      <a class="release-item" href="https://docs.google.com/forms/d/e/1FAIpQLSdUHudLsTsiJpuJpRFekUIlSsXS5-bvW-9oYiJS9oDRzVD6XQ/viewform?usp=share_link&ouid=113455481818146962943" target="_blank">
+        <div class="release-num">03</div>
+        <div class="release-info"><div class="release-title">Minor Release</div><div class="release-desc">Any participant under 18 — requires parent or guardian signature</div></div>
+        <div class="release-arrow">→</div>
+      </a>
+      <a class="release-item" href="https://docs.google.com/forms/d/e/1FAIpQLScKyoukiqECMeCbZS7VRTK1mjMaaDgdujRoo8d4AHcHDaMYxQ/viewform?usp=share_link&ouid=113455481818146962943" target="_blank">
+        <div class="release-num">04</div>
+        <div class="release-info"><div class="release-title">Music Release</div><div class="release-desc">Any original or licensed music used in your film's soundtrack</div></div>
+        <div class="release-arrow">→</div>
+      </a>
+      <a class="release-item" href="https://docs.google.com/forms/d/e/1FAIpQLSf1FxZlFqehxJz02PWNa_l3FOwQPYBNzFPafTTWS_fiARHK3A/viewform?usp=sharing&ouid=113455481818146962943" target="_blank">
+        <div class="release-num">05</div>
+        <div class="release-info"><div class="release-title">Location Release</div><div class="release-desc">Any private property, business, or venue used as a filming location</div></div>
+        <div class="release-arrow">→</div>
+      </a>
+    </div>
+  </div>
+  <div class="footer-note">
+    <div class="footer-note-num">※</div>
+    <div>
+      <div class="footer-note-title">Not Sure Which Ones You Need?</div>
+      <div class="footer-note-body">If you shot on someone's property — location release. If someone is on screen — cast release. If anyone is under 18 — minor release. If there's music — music release. Everyone on your crew — crew release. When in doubt, fill it out.</div>
+    </div>
+  </div>
+  <footer>
+    <a href="index.html" class="footer-logo">POW<span style="color:var(--red)">4</span>17</a>
+    <p class="footer-copy">POW417 — Proof of Work — Springfield, MO — Human Films Only</p>
+  </footer>
+</body>
+</html>
