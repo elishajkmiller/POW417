@@ -356,6 +356,174 @@
       main { padding: 110px 1.5rem 80px; }
       footer { padding: 1.75rem 1.5rem; flex-direction: column; align-items: flex-start; }
     }
+
+    /* NAV MOBILE */
+    .nav-ctas { display: flex; gap: 0.6rem; align-items: center; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--ink);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--dust);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.5rem, 10vw, 4rem);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--red); }
+    .mobile-menu a.filled {
+      color: var(--dust);
+      background: var(--ink);
+      padding: 0.4rem 1.5rem;
+    }
+    .mobile-menu a.filled:hover { background: var(--red); }
+    .mobile-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 3rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: none;
+      border: none;
+      cursor: pointer;
+      opacity: 0.6;
+    }
+    .mobile-close:hover { opacity: 1; }
+
+    @media (max-width: 768px) {
+      .nav-ctas { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    /* ── HAMBURGER & MOBILE MENU ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+      z-index: 200;
+      position: relative;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--ink);
+      transition: transform 0.28s ease, opacity 0.28s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--dust);
+      z-index: 150;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-menu a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.5rem, 12vw, 4.5rem);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--red); }
+    .mobile-menu a.m-filled {
+      background: var(--ink);
+      color: var(--dust);
+      padding: 0.3rem 1.25rem;
+    }
+    .mobile-menu a.m-filled:hover { background: var(--red); color: #fff; }
+    .mobile-close {
+      position: absolute;
+      top: 1.4rem;
+      right: 1.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      color: var(--ink);
+      cursor: pointer;
+      opacity: 0.55;
+      padding: 0.5rem;
+    }
+    .mobile-close:hover { opacity: 1; }
+
+    @media (max-width: 768px) {
+      .nav-ctas { display: none !important; }
+      .nav-hamburger { display: flex; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-ctas {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.4rem;
+      }
+      .nav-cta {
+        font-size: 0.55rem;
+        padding: 0.4rem 0.5rem;
+        text-align: center;
+        letter-spacing: 0.08em;
+      }
+    }
   </style>
 </head>
 <body>
@@ -367,7 +535,6 @@
       <a href="register.html" class="nav-cta">Register</a>
       <a href="releases.html" class="nav-cta">Releases</a>
       <a href="submission.html" class="nav-cta nav-cta-filled">Submit Film</a>
-    </div>
   </nav>
 
   <main>
@@ -515,6 +682,5 @@
       }
     });
   </script>
-
 </body>
 </html>
