@@ -28,10 +28,10 @@
     .page-header p { font-family: 'Barlow Condensed', sans-serif; font-weight: 300; font-size: clamp(1rem, 2vw, 1.4rem); letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.65; max-width: 580px; line-height: 1.4; }
 
     /* BODY LAYOUT */
-    .guidelines-wrap { display: grid; grid-template-columns: 220px 1fr; gap: 0; }
+    .guidelines-wrap { display: grid; grid-template-columns: 220px 1fr; gap: 0; align-items: start; }
 
     /* SIDEBAR NAV */
-    .sidebar { padding: 4rem 2rem 4rem 3rem; position: sticky; top: 5rem; height: fit-content; border-right: 1px solid var(--border); }
+    .sidebar { padding: 4rem 2rem 4rem 3rem; position: sticky; top: 5rem; border-right: 1px solid var(--border); }
     .sidebar-label { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.4; margin-bottom: 1.5rem; display: block; }
     .sidebar-links { display: flex; flex-direction: column; gap: 0; }
     .sidebar-links a { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); text-decoration: none; opacity: 0.4; padding: 0.5rem 0; border-bottom: 1px solid var(--border); transition: opacity 0.2s, color 0.2s; line-height: 1.5; }
@@ -49,14 +49,14 @@
     .g-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(1.6rem, 3vw, 2.2rem); text-transform: uppercase; letter-spacing: 0.03em; line-height: 1; }
 
     .g-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
-    .g-list li { font-size: 0.95rem; line-height: 1.75; padding: 1rem 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 20px 1fr; gap: 1rem; align-items: start; }
+    .g-list li { font-size: 0.95rem; line-height: 1.75; padding: 1rem 0; border-bottom: 1px solid var(--border); padding-left: 1.5rem; position: relative; }
     .g-list li:first-child { border-top: 1px solid var(--border); }
-    .g-list li::before { content: '—'; font-family: 'Space Mono', monospace; font-size: 0.6rem; opacity: 0.3; padding-top: 0.3rem; }
+    .g-list li::before { content: "—"; font-family: "Space Mono", monospace; font-size: 0.6rem; opacity: 0.3; position: absolute; left: 0; top: 1.1rem; }
     .g-list li strong { font-weight: 600; color: var(--ink); }
     .g-list li em { font-style: normal; color: var(--red); font-weight: 600; }
 
     /* OCC format block */
-    .format-block { margin-top: 1rem; margin-left: calc(20px + 1rem); border-left: 2px solid var(--red); padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.2rem; }
+    .format-block { margin-top: 1rem; margin-left: 0; border-left: 2px solid var(--red); padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.2rem; }
     .format-block span { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; line-height: 1.8; }
 
     /* Warning block */
