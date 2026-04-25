@@ -27,18 +27,53 @@
     .notice-banner { background: var(--ink); color: var(--dust); padding: 0.75rem 3rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
     .notice-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.4; flex-shrink: 0; }
     .notice-text { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.75; line-height: 1.7; }
-    .coming-soon { padding: 7rem 3rem; max-width: 860px; }
-    .coming-soon-inner { border: 1px solid var(--border); padding: 4rem; background: var(--warm); }
-    .coming-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.5; margin-bottom: 1.5rem; display: block; }
-    .coming-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2.5rem, 6vw, 4.5rem); text-transform: uppercase; line-height: 0.88; letter-spacing: -0.01em; margin-bottom: 1.5rem; }
-    .coming-headline span { color: var(--red); }
-    .coming-body { font-size: 1rem; line-height: 1.8; opacity: 0.75; max-width: 520px; }
-    .coming-body p + p { margin-top: 1rem; }
-    .coming-divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
-    .coming-detail { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; }
-    .coming-detail-item { }
-    .coming-detail-label { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.45; margin-bottom: 0.4rem; }
-    .coming-detail-val { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .releases-body { padding: 5rem 3rem 2rem; max-width: 960px; }
+    .section-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.6; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .doc-block { border: 1px solid var(--border); background: var(--warm); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin-bottom: 4rem; }
+    .doc-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.4rem; }
+    .doc-desc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.55; text-transform: uppercase; }
+    .doc-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .doc-btn { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.6rem 1.25rem; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); text-decoration: none; transition: background 0.2s, color 0.2s; }
+    .doc-btn:hover { background: var(--ink); color: var(--dust); }
+    .doc-btn-filled { background: var(--ink); color: var(--dust); }
+    .doc-btn-filled:hover { background: var(--ink-mid); }
+    .releases-grid { display: flex; flex-direction: column; gap: 0; }
+    .release-item { display: grid; grid-template-columns: 48px 1fr auto; gap: 2rem; align-items: center; padding: 2.25rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--ink); }
+    .release-item:first-child { border-top: 1px solid var(--border); }
+    .release-item:hover .release-arrow { transform: translateX(4px); opacity: 1; }
+    .release-item:hover .release-title { color: var(--red); }
+    .release-num { font-family: 'Space Mono', monospace; font-size: 0.6rem; opacity: 0.3; letter-spacing: 0.1em; }
+    .release-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.2rem); text-transform: uppercase; letter-spacing: 0.04em; line-height: 1; margin-bottom: 0.4rem; transition: color 0.2s; }
+    .release-desc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.5; text-transform: uppercase; line-height: 1.6; }
+    .release-arrow { font-size: 1.4rem; opacity: 0.25; transition: transform 0.2s, opacity 0.2s; flex-shrink: 0; }
+    .upload-section { padding: 5rem 3rem 7rem; max-width: 960px; border-top: 1px solid var(--border); }
+    .upload-form-block { margin-bottom: 2rem; }
+    .upload-form-block > label { display: block; font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.82; margin-bottom: 0.6rem; }
+    .upload-form-block > label .req { color: var(--red); margin-left: 3px; }
+    input[type="text"] { width: 100%; background: transparent; border: none; border-bottom: 1.5px solid rgba(17,16,8,0.25); color: var(--ink); font-family: 'Barlow', sans-serif; font-size: 1rem; padding: 0.6rem 0; outline: none; border-radius: 0; transition: border-color 0.2s; -webkit-appearance: none; }
+    input[type="text"]:focus { border-bottom-color: var(--ink); }
+    input[type="text"]::placeholder { color: rgba(17,16,8,0.2); }
+    .file-drop { border: 1.5px dashed rgba(17,16,8,0.25); padding: 3rem 2rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; position: relative; }
+    .file-drop:hover, .file-drop.dragover { border-color: var(--ink); background: rgba(17,16,8,0.03); }
+    .file-drop input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .file-drop-icon { font-size: 2rem; opacity: 0.2; margin-bottom: 0.75rem; }
+    .file-drop-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+    .file-drop-sub { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.45; }
+    .file-list { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .file-list-item { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; opacity: 0.7; display: flex; align-items: center; gap: 0.5rem; }
+    .file-list-item::before { content: '✓'; color: #3a7d4f; }
+    .submit-area { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
+    button[type="submit"] { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.75rem 2rem; background: var(--ink); color: var(--dust); border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+    button[type="submit"]:hover { background: var(--ink-mid); transform: translateY(-1px); }
+    button[type="submit"]:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+    #upload-status { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; }
+    #upload-status.error { color: var(--red); }
+    #upload-status.success { color: #3a7d4f; }
+    #success-screen { display: none; padding: 4rem 0; }
+    #success-screen h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2.5rem, 6vw, 4rem); text-transform: uppercase; line-height: 0.9; margin-bottom: 1rem; }
+    #success-screen h2 span { color: var(--red); }
+    #success-screen p { font-size: 0.9rem; opacity: 0.6; line-height: 1.8; }
     .footer-note { background: var(--warm); border-top: 1px solid var(--border); padding: 3rem; display: grid; grid-template-columns: 48px 1fr; gap: 2rem; align-items: start; max-width: 860px; }
     .footer-note-num { font-family: 'Space Mono', monospace; font-size: 0.6rem; opacity: 0.3; padding-top: 0.2rem; }
     .footer-note-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
@@ -52,8 +87,11 @@
       .nav-cta { font-size: 0.5rem !important; padding: 0.4rem 0.35rem !important; text-align: center; letter-spacing: 0.06em; }
       .page-header { padding: 7rem 1.5rem 3rem; }
       .notice-banner { padding: 0.75rem 1.5rem; }
-      .coming-soon { padding: 3rem 1.5rem 5rem; }
-      .coming-soon-inner { padding: 2.5rem 1.5rem; }
+      .releases-body { padding: 3rem 1.5rem 2rem; }
+      .upload-section { padding: 3rem 1.5rem 5rem; }
+      .doc-block { padding: 1.5rem; }
+      .release-item { grid-template-columns: 32px 1fr auto; gap: 1rem; padding: 1.75rem 0; }
+      .footer-note { padding: 2rem 1.5rem; }
       footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
     }
   </style>
@@ -67,51 +105,179 @@
       <a href="submission.html" class="nav-cta nav-cta-filled">Submit Film</a>
     </div>
   </nav>
+
   <header class="page-header">
     <div class="page-header-bg" aria-hidden="true">Release</div>
-    <span class="page-header-eyebrow">006 — Release Forms</span>
+    <span class="page-header-eyebrow">Release Forms</span>
     <h1 class="page-header-title">Releases</h1>
-    <p class="page-header-sub">Release forms will be available at the opening event. Fill them out before production begins.</p>
+    <p class="page-header-sub">Every person, place, and track in your film needs a release. Fill these out during production — don't wait until the deadline.</p>
   </header>
+
   <div class="notice-banner">
-    <span class="notice-label">Heads Up</span>
-    <span class="notice-text">Release forms are distributed at the opening event — bring a pen.</span>
+    <span class="notice-label">Required</span>
+    <span class="notice-text">All applicable releases must be completed before your film is eligible for screening.</span>
   </div>
-  <div class="coming-soon">
-    <div class="coming-soon-inner">
-      <span class="coming-eyebrow">006 — Release Forms</span>
-      <h2 class="coming-headline">Forms Available<br>at the <span>Opening.</span></h2>
-      <div class="coming-body">
-        <p>Release forms will be handed out at the opening event on April 25. Pick them up when you arrive, fill them out before you start rolling, and return them with your film submission.</p>
-        <p>You'll need a release for every person on screen, every location you shoot, and any music you use. When in doubt, fill it out.</p>
+
+  <div class="releases-body">
+    <div class="section-label">Release Document</div>
+    <div class="doc-block">
+      <div class="doc-info">
+        <div class="doc-title">POW417 2026 Release Forms</div>
+        <div class="doc-desc">10-page document — all release types included</div>
       </div>
-      <div class="coming-divider"></div>
-      <div class="coming-detail">
-        <div class="coming-detail-item">
-          <div class="coming-detail-label">Available</div>
-          <div class="coming-detail-val">Opening Event — Apr 25</div>
-        </div>
-        <div class="coming-detail-item">
-          <div class="coming-detail-label">Due With</div>
-          <div class="coming-detail-val">Film Submission</div>
-        </div>
-        <div class="coming-detail-item">
-          <div class="coming-detail-label">Questions</div>
-          <div class="coming-detail-val"><a href="https://instagram.com/pow417films" target="_blank" style="color:var(--ink);">@pow417films</a></div>
-        </div>
+      <div class="doc-actions">
+        <a class="doc-btn" href="https://docs.google.com/document/d/1m7KfIYO1F0_3N1vhROMBRVzrAUXd6cxuUMqlSafCick/preview" target="_blank">View</a>
+        <a class="doc-btn doc-btn-filled" href="https://docs.google.com/document/d/1m7KfIYO1F0_3N1vhROMBRVzrAUXd6cxuUMqlSafCick/export?format=pdf" target="_blank">Download PDF</a>
       </div>
     </div>
+
+    <div class="section-label">Digital Release Links</div>
+    <div class="releases-grid">
+      <a class="release-item" href="https://docs.google.com/forms/d/e/1FAIpQLScrj4PiGZvGO-1GwoJw8pKph10TbWPxVVtI8ByPHJKvuNpANg/viewform?usp=share_link&ouid=113455481818146962943" target="_blank">
+        <div class="release-num">01</div>
+        <div class="release-info"><div class="release-title">Crew Release</div><div class="release-desc">Everyone behind the camera — directors, editors, crew members</div></div>
+        <div class="release-arrow">→</div>
+      </a>
+      <a class="release-item" href="https://docs.google.com/forms/d/e/1FAIpQLSeSWzttL_2gFjAW8M_eZMdDhEUe3vkWO0QSSoFQoWfsXM6kPA/viewform?usp=share_link&ouid=113455481818146962943" target="_blank">
+        <div class="release-num">02</div>
+        <div class="release-info"><div class="release-title">Cast Release</div><div class="release-desc">Anyone who appears on screen in your film</div></div>
+        <div class="release-arrow">→</div>
+      </a>
+      <a class="release-item" href="https://docs.google.com/forms/d/e/1FAIpQLSdUHudLsTsiJpuJpRFekUIlSsXS5-bvW-9oYiJS9oDRzVD6XQ/viewform?usp=share_link&ouid=113455481818146962943" target="_blank">
+        <div class="release-num">03</div>
+        <div class="release-info"><div class="release-title">Minor Release</div><div class="release-desc">Any participant under 18 — requires parent or guardian signature</div></div>
+        <div class="release-arrow">→</div>
+      </a>
+      <a class="release-item" href="https://docs.google.com/forms/d/e/1FAIpQLScKyoukiqECMeCbZS7VRTK1mjMaaDgdujRoo8d4AHcHDaMYxQ/viewform?usp=share_link&ouid=113455481818146962943" target="_blank">
+        <div class="release-num">04</div>
+        <div class="release-info"><div class="release-title">Music Release</div><div class="release-desc">Any original or licensed music used in your film's soundtrack</div></div>
+        <div class="release-arrow">→</div>
+      </a>
+      <a class="release-item" href="https://docs.google.com/forms/d/e/1FAIpQLSf1FxZlFqehxJz02PWNa_l3FOwQPYBNzFPafTTWS_fiARHK3A/viewform?usp=sharing&ouid=113455481818146962943" target="_blank">
+        <div class="release-num">05</div>
+        <div class="release-info"><div class="release-title">Location Release</div><div class="release-desc">Any private property, business, or venue used as a filming location</div></div>
+        <div class="release-arrow">→</div>
+      </a>
+    </div>
   </div>
+
+  <div class="upload-section">
+    <div class="section-label">Submit Your Completed Releases</div>
+    <div id="upload-wrapper">
+      <form id="upload-form" novalidate>
+        <div class="upload-form-block">
+          <label for="team-name">Your Team Name <span class="req">*</span></label>
+          <input type="text" id="team-name" name="teamName" placeholder="e.g. Midnight Crew" required />
+        </div>
+        <div class="upload-form-block">
+          <label>Photos of Completed Release Forms <span class="req">*</span></label>
+          <div class="file-drop" id="file-drop">
+            <input type="file" id="file-input" accept="image/*,.pdf" multiple />
+            <div class="file-drop-icon">📄</div>
+            <div class="file-drop-label">Tap or drag to add photos</div>
+            <div class="file-drop-sub">JPG, PNG, or PDF — up to 10 pages</div>
+          </div>
+          <div class="file-list" id="file-list"></div>
+        </div>
+        <div class="submit-area">
+          <button type="submit" id="upload-btn">Submit Releases</button>
+          <span id="upload-status"></span>
+        </div>
+      </form>
+    </div>
+    <div id="success-screen">
+      <h2>Releases<br><span>Received.</span></h2>
+      <p>Got it — releases for <strong id="success-team"></strong> have been submitted.<br>You're cleared for screening.</p>
+    </div>
+  </div>
+
   <div class="footer-note">
     <div class="footer-note-num">※</div>
     <div>
-      <div class="footer-note-title">What Releases Will You Need?</div>
-      <div class="footer-note-body">If you shoot on someone's property — location release. If someone is on screen — cast release. If anyone is under 18 — minor release. If there's music — music release. Everyone on your crew — crew release. When in doubt, fill it out.</div>
+      <div class="footer-note-title">Not Sure Which Ones You Need?</div>
+      <div class="footer-note-body">If you shot on someone's property — location release. If someone is on screen — cast release. If anyone is under 18 — minor release. If there's music — music release. Everyone on your crew — crew release. When in doubt, fill it out.</div>
     </div>
   </div>
+
   <footer>
     <a href="index.html" class="footer-logo">POW<span style="color:var(--red)">4</span>17</a>
     <p class="footer-copy">POW417 — Proof of Work — Springfield, MO — Human Films Only</p>
   </footer>
+
+  <script>
+    const UPLOAD_URL = 'https://script.google.com/macros/s/AKfycbzqGDWFOvgN0QHVDj0BF0HejPAIIDY9S-VE2uVp26mwTNI9JnP3cTlDv4yoJheF7UFk/exec';
+    const fileDrop = document.getElementById('file-drop');
+    const fileInput = document.getElementById('file-input');
+    const fileList = document.getElementById('file-list');
+    const form = document.getElementById('upload-form');
+    const btn = document.getElementById('upload-btn');
+    const statusEl = document.getElementById('upload-status');
+    let selectedFiles = [];
+
+    fileDrop.addEventListener('dragover', (e) => { e.preventDefault(); fileDrop.classList.add('dragover'); });
+    fileDrop.addEventListener('dragleave', () => fileDrop.classList.remove('dragover'));
+    fileDrop.addEventListener('drop', (e) => {
+      e.preventDefault();
+      fileDrop.classList.remove('dragover');
+      addFiles(e.dataTransfer.files);
+    });
+    fileInput.addEventListener('change', () => addFiles(fileInput.files));
+
+    function addFiles(files) {
+      for (const file of files) {
+        if (selectedFiles.length >= 10) break;
+        selectedFiles.push(file);
+      }
+      renderFileList();
+    }
+
+    function renderFileList() {
+      fileList.innerHTML = selectedFiles.map((f) =>
+        `<div class="file-list-item">${f.name} (${(f.size / 1024).toFixed(0)} KB)</div>`
+      ).join('');
+    }
+
+    function toBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const teamName = document.getElementById('team-name').value.trim();
+      if (!teamName) { statusEl.className = 'error'; statusEl.textContent = 'Please enter your team name.'; return; }
+      if (selectedFiles.length === 0) { statusEl.className = 'error'; statusEl.textContent = 'Please add at least one photo.'; return; }
+
+      btn.disabled = true;
+      btn.textContent = 'Uploading...';
+      statusEl.textContent = '';
+
+      try {
+        const filesData = await Promise.all(selectedFiles.map(async (file) => ({
+          name: file.name,
+          mimeType: file.type,
+          data: await toBase64(file)
+        })));
+
+        await fetch(UPLOAD_URL, {
+          method: 'POST',
+          body: JSON.stringify({ teamName, files: filesData })
+        });
+
+        document.getElementById('upload-wrapper').style.display = 'none';
+        document.getElementById('success-screen').style.display = 'block';
+        document.getElementById('success-team').textContent = teamName;
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Submit Releases';
+        statusEl.className = 'error';
+        statusEl.textContent = 'Upload failed. Try again or DM @pow417films.';
+      }
+    });
+  </script>
 </body>
 </html>
