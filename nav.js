@@ -34,7 +34,7 @@ const NAV_BUTTONS = [
 //  Don't edit below this line
 // ─────────────────────────────────────────────
 
-(function () {
+document.addEventListener('DOMContentLoaded', function () {
   const nav = document.createElement('nav');
   nav.id = 'nav';
 
@@ -61,4 +61,4 @@ const NAV_BUTTONS = [
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   });
-})();
+});
