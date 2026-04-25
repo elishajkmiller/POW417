@@ -229,19 +229,15 @@
       statusEl.textContent = '';
 
       try {
-        for (let i = 0; i < selectedFiles.length; i++) {
-          const file = selectedFiles[i];
-          statusEl.textContent = `Uploading ${i + 1} of ${selectedFiles.length}...`;
-          const b64 = await toBase64(file);
-          const params = new URLSearchParams({
-            action: 'upload',
-            teamName: teamName,
-            fileName: file.name,
-            mimeType: file.type || 'image/jpeg',
-            fileData: b64
-          });
-          await fetch(UPLOAD_URL + '?' + params.toString(), { method: 'GET', mode: 'no-cors' });
-        }
+        const filesData = await Promise.all(selectedFiles.map(async (file) => ({
+          name: file.name,
+          data: await toBase64(file)
+        })));
+
+        await fetch(UPLOAD_URL, {
+          method: 'POST',
+          body: JSON.stringify({ teamName, files: filesData })
+        });
 
         document.getElementById('upload-wrapper').style.display = 'none';
         document.getElementById('success-screen').style.display = 'block';
