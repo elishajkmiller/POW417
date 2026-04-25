@@ -28,15 +28,9 @@
     .page-header p { font-family: 'Barlow Condensed', sans-serif; font-weight: 300; font-size: clamp(1rem, 2vw, 1.4rem); letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.65; max-width: 580px; line-height: 1.4; }
 
     /* BODY LAYOUT */
-    .guidelines-wrap { display: grid; grid-template-columns: 220px 1fr; gap: 0; align-items: start; }
+    .guidelines-wrap {}
 
     /* SIDEBAR NAV */
-    .sidebar { padding: 4rem 2rem 4rem 3rem; position: sticky; top: 5rem; border-right: 1px solid var(--border); }
-    .sidebar-label { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.4; margin-bottom: 1.5rem; display: block; }
-    .sidebar-links { display: flex; flex-direction: column; gap: 0; }
-    .sidebar-links a { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); text-decoration: none; opacity: 0.4; padding: 0.5rem 0; border-bottom: 1px solid var(--border); transition: opacity 0.2s, color 0.2s; line-height: 1.5; }
-    .sidebar-links a:first-child { border-top: 1px solid var(--border); }
-    .sidebar-links a:hover { opacity: 1; color: var(--red); }
 
     /* CONTENT */
     .guidelines-content { padding: 4rem 3rem 7rem; max-width: 720px; }
@@ -79,7 +73,6 @@
       .nav-cta { font-size: 0.5rem !important; padding: 0.4rem 0.35rem !important; text-align: center; letter-spacing: 0.06em; }
       .page-header { padding: 7rem 1.5rem 3rem; }
       .guidelines-wrap { grid-template-columns: 1fr; }
-      .sidebar { display: none; }
       .guidelines-content { padding: 3rem 1.5rem 5rem; }
       footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
     }
@@ -97,21 +90,6 @@
   <div class="guidelines-wrap">
 
     <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <span class="sidebar-label">Sections</span>
-      <nav class="sidebar-links">
-        <a href="#registration">Registration</a>
-        <a href="#ceremonies">Opening Ceremonies</a>
-        <a href="#participants">Participants</a>
-        <a href="#prep">Pre-Challenge Prep</a>
-        <a href="#film">Film Requirements</a>
-        <a href="#poster">Poster Requirements</a>
-        <a href="#equipment">Equipment</a>
-        <a href="#submissions">Submissions</a>
-        <a href="#screenings">Screenings</a>
-        <a href="#prohibited">Prohibited Actions</a>
-      </nav>
-    </aside>
 
     <!-- CONTENT -->
     <main class="guidelines-content">
