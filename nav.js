@@ -8,7 +8,7 @@ const NAV_BUTTONS = [
     label:   'Guidelines',
     href:    'guidelines.html',
     filled:  false,
-    enabled: false,
+    enabled: true,
   },
   {
     label:   'Register',
