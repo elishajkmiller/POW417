@@ -6,6 +6,7 @@
 <title>POW417 — Proof of Work</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="nav.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -78,12 +79,8 @@
   .badge-core { color: #555; border-color: #aaa; }
   .register-section { background: var(--ink); color: var(--dust); padding: 10rem 3rem; text-align: center; position: relative; overflow: hidden; }
   .register-bg-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 22vw; text-transform: uppercase; white-space: nowrap; opacity: 0.04; letter-spacing: -0.04em; pointer-events: none; user-select: none; }
-  .register-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.35; margin-bottom: 2rem; }
   .register-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(3rem, 9vw, 7rem); text-transform: uppercase; line-height: 0.88; margin-bottom: 2rem; position: relative; z-index: 1; }
   .register-sub { font-size: 1rem; opacity: 0.72; max-width: 440px; margin: 0 auto 3rem; position: relative; z-index: 1; line-height: 1.7; }
-  .register-deadline { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.3; margin-bottom: 2.5rem; position: relative; z-index: 1; }
-  .register-btn { display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.9rem 2.5rem; background: var(--dust); color: var(--ink); text-decoration: none; transition: background 0.2s, transform 0.15s; position: relative; z-index: 1; }
-  .register-btn:hover { background: #fff; transform: translateY(-2px); }
   footer { padding: 3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); gap: 2rem; flex-wrap: wrap; }
   .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.25rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; }
   .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.3; }
@@ -122,13 +119,6 @@
 </style>
 </head>
 <body>
-<nav id="nav">
-  <a href="#" class="nav-logo">POW<span style="color:var(--red)">4</span>17</a>
-  <div class="nav-ctas">
-    <a href="releases.html" class="nav-cta">Releases</a>
-    <a href="submission.html" class="nav-cta nav-cta-filled">Submit Film</a>
-  </div>
-</nav>
 <section class="hero" style="padding-top:6rem;">
   <div class="filmstrip" aria-hidden="true">
     <div class="filmstrip-hole"></div><div class="filmstrip-hole"></div><div class="filmstrip-hole"></div><div class="filmstrip-hole"></div>
@@ -171,16 +161,14 @@
   </div>
 </div>
 
-<!-- Register / status banner -->
 <section class="register-section" id="register">
   <div class="register-bg-text" aria-hidden="true">TONIGHT</div>
   <h2 class="register-headline reveal reveal-delay-1">The<br>10 Teams<br>Are off</h2>
   <p class="register-sub reveal reveal-delay-2">48 hours on the clock, films must be finished by 6:47 pm Sunday</p>
-</section><!-- /register-section -->
+</section>
 
 <hr class="h-rule">
 
-<!-- The 48 Hours timeline -->
 <section class="hours-section" id="the48">
   <h2 class="reveal" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2rem,5vw,4rem);text-transform:uppercase;line-height:0.9;margin-bottom:3rem;letter-spacing:-0.01em;">48 Hours.<br>No Prompt.<br>Make a Film.</h2>
   <div class="hours-grid reveal reveal-delay-1">
@@ -192,7 +180,6 @@
   </div>
 </section>
 
-<!-- Manifesto -->
 <section class="manifesto" id="about">
   <div class="manifesto-grid">
     <div><h2 class="manifesto-headline reveal">Not a<br><em>competition.</em><br>A coming<br>together.</h2></div>
@@ -204,7 +191,6 @@
   </div>
 </section>
 
-<!-- Rules -->
 <section id="rules">
   <div class="philosophy-grid">
     <div class="phil-sidebar">
@@ -230,9 +216,8 @@
   </ul>
   <p class="footer-copy">POW417 — Proof of Work — Springfield, MO — Human Films Only</p>
 </footer>
+
 <script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
