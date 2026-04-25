@@ -3,170 +3,261 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Releases — POW417</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <title>Guidelines — POW417</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --dust: #DFD0CE; --dust-dark: #C9B8B5; --ink: #111008; --ink-mid: #2C2618; --red: #8C1F0E; --red-light: #C43D28; --warm: #E8DADA; --border: rgba(17,16,8,0.15); }
+    :root { --dust: #DFD0CE; --ink: #111008; --ink-mid: #2C2618; --red: #8C1F0E; --red-light: #C43D28; --warm: #E8DADA; --border: rgba(17,16,8,0.15); }
     html { scroll-behavior: smooth; }
-    body { background: var(--dust); color: var(--ink); font-family: 'Barlow', sans-serif; font-weight: 400; line-height: 1.6; overflow-x: hidden; }
+    body { background: var(--dust); color: var(--ink); font-family: 'Barlow', sans-serif; font-weight: 400; line-height: 1.6; min-height: 100vh; }
     body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; opacity: 0.72; }
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 3rem; background: rgba(223,208,206,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
     .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.4rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); text-decoration: none; flex-shrink: 0; }
     .nav-ctas { display: flex; gap: 0.6rem; align-items: center; }
-    .nav-cta { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.5rem 1.25rem; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); text-decoration: none; transition: background 0.2s, color 0.2s; cursor: pointer; }
+    .nav-cta { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.5rem 1.25rem; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); text-decoration: none; transition: background 0.2s, color 0.2s; }
     .nav-cta:hover { background: var(--ink); color: var(--dust); }
     .nav-cta-filled { background: var(--ink); color: var(--dust); }
     .nav-cta-filled:hover { background: var(--ink-mid); color: var(--dust); }
+
+    /* PAGE HEADER */
     .page-header { padding: 10rem 3rem 5rem; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
-    .page-header-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.55; margin-bottom: 0.75rem; display: block; }
-    .page-header-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(4rem, 14vw, 11rem); line-height: 0.85; letter-spacing: -0.02em; text-transform: uppercase; }
-    .page-header-sub { margin-top: 1.5rem; font-family: 'Barlow Condensed', sans-serif; font-weight: 300; font-size: clamp(1rem, 2vw, 1.4rem); letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.65; max-width: 580px; line-height: 1.4; }
     .page-header-bg { position: absolute; top: 50%; right: -1rem; transform: translateY(-50%); font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 18vw; text-transform: uppercase; opacity: 0.04; letter-spacing: -0.04em; pointer-events: none; user-select: none; white-space: nowrap; line-height: 1; }
-    .notice-banner { background: var(--ink); color: var(--dust); padding: 0.75rem 3rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
-    .notice-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.4; flex-shrink: 0; }
-    .notice-text { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.75; line-height: 1.7; }
-    .releases-body { padding: 5rem 3rem 2rem; max-width: 960px; }
-    .section-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.6; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
-    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .doc-block { border: 1px solid var(--border); background: var(--warm); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin-bottom: 4rem; }
-    .doc-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.4rem; }
-    .doc-desc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.55; text-transform: uppercase; }
-    .doc-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-    .doc-btn { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.6rem 1.25rem; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); text-decoration: none; transition: background 0.2s, color 0.2s; }
-    .doc-btn:hover { background: var(--ink); color: var(--dust); }
-    .doc-btn-filled { background: var(--ink); color: var(--dust); }
-    .doc-btn-filled:hover { background: var(--ink-mid); }
-    .releases-grid { display: flex; flex-direction: column; gap: 0; }
-    .release-item { display: grid; grid-template-columns: 48px 1fr auto; gap: 2rem; align-items: center; padding: 2.25rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--ink); }
-    .release-item:first-child { border-top: 1px solid var(--border); }
-    .release-item:hover .release-arrow { transform: translateX(4px); opacity: 1; }
-    .release-item:hover .release-title { color: var(--red); }
-    .release-num { font-family: 'Space Mono', monospace; font-size: 0.6rem; opacity: 0.3; letter-spacing: 0.1em; }
-    .release-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.2rem); text-transform: uppercase; letter-spacing: 0.04em; line-height: 1; margin-bottom: 0.4rem; transition: color 0.2s; }
-    .release-desc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.5; text-transform: uppercase; line-height: 1.6; }
-    .release-arrow { font-size: 1.4rem; opacity: 0.25; transition: transform 0.2s, opacity 0.2s; flex-shrink: 0; }
-    .upload-section { padding: 5rem 3rem 7rem; max-width: 960px; border-top: 1px solid var(--border); }
-    .upload-form-block { margin-bottom: 2rem; }
-    .upload-form-block > label { display: block; font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.82; margin-bottom: 0.6rem; }
-    .upload-form-block > label .req { color: var(--red); margin-left: 3px; }
-    input[type="text"] { width: 100%; background: transparent; border: none; border-bottom: 1.5px solid rgba(17,16,8,0.25); color: var(--ink); font-family: 'Barlow', sans-serif; font-size: 1rem; padding: 0.6rem 0; outline: none; border-radius: 0; transition: border-color 0.2s; -webkit-appearance: none; }
-    input[type="text"]:focus { border-bottom-color: var(--ink); }
-    input[type="text"]::placeholder { color: rgba(17,16,8,0.2); }
-    .file-drop { border: 1.5px dashed rgba(17,16,8,0.25); padding: 3rem 2rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; position: relative; }
-    .file-drop:hover, .file-drop.dragover { border-color: var(--ink); background: rgba(17,16,8,0.03); }
-    .file-drop input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-    .file-drop-icon { font-size: 2rem; opacity: 0.2; margin-bottom: 0.75rem; }
-    .file-drop-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
-    .file-drop-sub { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.45; }
-    .file-list { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
-    .file-list-item { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; opacity: 0.7; display: flex; align-items: center; gap: 0.5rem; }
-    .file-list-item::before { content: '✓'; color: #3a7d4f; }
-    .submit-area { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
-    button[type="submit"] { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.75rem 2rem; background: var(--ink); color: var(--dust); border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; }
-    button[type="submit"]:hover { background: var(--ink-mid); transform: translateY(-1px); }
-    button[type="submit"]:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
-    #upload-status { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; }
-    #upload-status.error { color: var(--red); }
-    #upload-status.success { color: #3a7d4f; }
-    #success-screen { display: none; padding: 4rem 0; }
-    #success-screen h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2.5rem, 6vw, 4rem); text-transform: uppercase; line-height: 0.9; margin-bottom: 1rem; }
-    #success-screen h2 span { color: var(--red); }
-    #success-screen p { font-size: 0.9rem; opacity: 0.6; line-height: 1.8; }
-    .footer-note { background: var(--warm); border-top: 1px solid var(--border); padding: 3rem; display: grid; grid-template-columns: 48px 1fr; gap: 2rem; align-items: start; max-width: 860px; }
-    .footer-note-num { font-family: 'Space Mono', monospace; font-size: 0.6rem; opacity: 0.3; padding-top: 0.2rem; }
-    .footer-note-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
-    .footer-note-body { font-size: 0.875rem; opacity: 0.65; line-height: 1.7; max-width: 560px; }
+    .eyebrow { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.55; margin-bottom: 0.75rem; display: block; }
+    .page-header h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(4rem, 14vw, 11rem); line-height: 0.85; letter-spacing: -0.02em; text-transform: uppercase; margin-bottom: 1rem; }
+    .page-header p { font-family: 'Barlow Condensed', sans-serif; font-weight: 300; font-size: clamp(1rem, 2vw, 1.4rem); letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.65; max-width: 580px; line-height: 1.4; }
+
+    /* BODY LAYOUT */
+    .guidelines-wrap { display: grid; grid-template-columns: 220px 1fr; gap: 0; }
+
+    /* SIDEBAR NAV */
+    .sidebar { padding: 4rem 2rem 4rem 3rem; position: sticky; top: 5rem; height: fit-content; border-right: 1px solid var(--border); }
+    .sidebar-label { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.4; margin-bottom: 1.5rem; display: block; }
+    .sidebar-links { display: flex; flex-direction: column; gap: 0; }
+    .sidebar-links a { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); text-decoration: none; opacity: 0.4; padding: 0.5rem 0; border-bottom: 1px solid var(--border); transition: opacity 0.2s, color 0.2s; line-height: 1.5; }
+    .sidebar-links a:first-child { border-top: 1px solid var(--border); }
+    .sidebar-links a:hover { opacity: 1; color: var(--red); }
+
+    /* CONTENT */
+    .guidelines-content { padding: 4rem 3rem 7rem; max-width: 720px; }
+
+    .g-section { margin-bottom: 5rem; }
+    .g-section:last-child { margin-bottom: 0; }
+
+    .g-section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .g-num { font-family: 'Space Mono', monospace; font-size: 0.55rem; opacity: 0.3; letter-spacing: 0.1em; flex-shrink: 0; padding-top: 0.2rem; }
+    .g-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(1.6rem, 3vw, 2.2rem); text-transform: uppercase; letter-spacing: 0.03em; line-height: 1; }
+
+    .g-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+    .g-list li { font-size: 0.95rem; line-height: 1.75; padding: 1rem 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 20px 1fr; gap: 1rem; align-items: start; }
+    .g-list li:first-child { border-top: 1px solid var(--border); }
+    .g-list li::before { content: '—'; font-family: 'Space Mono', monospace; font-size: 0.6rem; opacity: 0.3; padding-top: 0.3rem; }
+    .g-list li strong { font-weight: 600; color: var(--ink); }
+    .g-list li em { font-style: normal; color: var(--red); font-weight: 600; }
+
+    /* OCC format block */
+    .format-block { margin-top: 1rem; margin-left: calc(20px + 1rem); border-left: 2px solid var(--red); padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.2rem; }
+    .format-block span { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; line-height: 1.8; }
+
+    /* Warning block */
+    .g-warning { background: var(--ink); color: var(--dust); padding: 2rem 2.5rem; margin-top: 2rem; }
+    .g-warning p { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; line-height: 1.9; text-transform: uppercase; opacity: 0.85; }
+    .g-warning p + p { margin-top: 1rem; opacity: 0.5; }
+
+    /* Consent block */
+    .g-consent { border: 1px solid var(--border); background: var(--warm); padding: 2rem 2.5rem; margin-top: 3rem; }
+    .g-consent p { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; line-height: 1.9; text-transform: uppercase; opacity: 0.75; }
+    .g-consent p + p { margin-top: 1rem; font-weight: 700; opacity: 1; }
+
     footer { padding: 3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); gap: 2rem; flex-wrap: wrap; }
     .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.25rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; text-decoration: none; color: var(--ink); }
     .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.3; }
+
     @media (max-width: 768px) {
       nav { padding: 0.75rem 1rem; }
       .nav-ctas { display: grid !important; grid-template-columns: 1fr 1fr; gap: 0.35rem; }
       .nav-cta { font-size: 0.5rem !important; padding: 0.4rem 0.35rem !important; text-align: center; letter-spacing: 0.06em; }
       .page-header { padding: 7rem 1.5rem 3rem; }
-      .notice-banner { padding: 0.75rem 1.5rem; }
-      .releases-body { padding: 3rem 1.5rem 2rem; }
-      .upload-section { padding: 3rem 1.5rem 5rem; }
-      .doc-block { padding: 1.5rem; }
-      .release-item { grid-template-columns: 32px 1fr auto; gap: 1rem; padding: 1.75rem 0; }
-      .footer-note { padding: 2rem 1.5rem; }
+      .guidelines-wrap { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .guidelines-content { padding: 3rem 1.5rem 5rem; }
       footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
-  <nav>
-    <a class="nav-logo" href="index.html">POW<span style="color:var(--red)">4</span>17</a>
-    <div class="nav-ctas">
-      <a href="releases.html" class="nav-cta">Releases</a>
-      <a href="submission.html" class="nav-cta nav-cta-filled">Submit Film</a>
-    </div>
-  </nav>
 
   <header class="page-header">
-    <div class="page-header-bg" aria-hidden="true">Release</div>
-    <span class="page-header-eyebrow">Release Forms</span>
-    <h1 class="page-header-title">Releases</h1>
-    <p class="page-header-sub">Every person, place, and track in your film needs a release. Fill these out during production — don't wait until the deadline.</p>
+    <div class="page-header-bg" aria-hidden="true">Guidelines</div>
+    <span class="eyebrow">POW417 2026</span>
+    <h1>Challenge<br>Guidelines</h1>
+    <p>Everything you need to know before the clock starts.</p>
   </header>
 
-  <div class="notice-banner">
-    <span class="notice-label">Required</span>
-    <span class="notice-text">All applicable releases must be completed before your film is eligible for screening.</span>
-  </div>
+  <div class="guidelines-wrap">
 
-  <div class="releases-body">
-    <div class="section-label">Release Document</div>
-    <div class="doc-block">
-      <div class="doc-info">
-        <div class="doc-title">POW417 2026 Release Forms</div>
-        <div class="doc-desc">10-page document — all release types included</div>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <span class="sidebar-label">Sections</span>
+      <nav class="sidebar-links">
+        <a href="#registration">Registration</a>
+        <a href="#ceremonies">Opening Ceremonies</a>
+        <a href="#participants">Participants</a>
+        <a href="#prep">Pre-Challenge Prep</a>
+        <a href="#film">Film Requirements</a>
+        <a href="#poster">Poster Requirements</a>
+        <a href="#equipment">Equipment</a>
+        <a href="#submissions">Submissions</a>
+        <a href="#screenings">Screenings</a>
+        <a href="#prohibited">Prohibited Actions</a>
+      </nav>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="guidelines-content">
+
+      <div class="g-section" id="registration">
+        <div class="g-section-header">
+          <span class="g-num">01</span>
+          <h2 class="g-title">Registration</h2>
+        </div>
+        <ul class="g-list">
+          <li>Teams must be registered before <strong>3:00 PM on April 24, 2026.</strong></li>
+          <li>Only <strong>one member</strong> from each team needs to register.</li>
+        </ul>
       </div>
-      <div class="doc-actions">
-        <a class="doc-btn" href="https://docs.google.com/document/d/1m7KfIYO1F0_3N1vhROMBRVzrAUXd6cxuUMqlSafCick/preview" target="_blank">View</a>
-        <a class="doc-btn doc-btn-filled" href="https://docs.google.com/document/d/1m7KfIYO1F0_3N1vhROMBRVzrAUXd6cxuUMqlSafCick/export?format=pdf" target="_blank">Download PDF</a>
+
+      <div class="g-section" id="ceremonies">
+        <div class="g-section-header">
+          <span class="g-num">02</span>
+          <h2 class="g-title">Opening Ceremonies</h2>
+        </div>
+        <ul class="g-list">
+          <li>Opening ceremonies will be held on <strong>April 26, 2026 at 6:00 PM</strong> at <strong>412 S Campbell Ave, Springfield, MO 65806.</strong></li>
+          <li>The allotted <strong>48 hours begin when the ceremonies are dismissed.</strong></li>
+          <li>It is <em>highly recommended</em> that at least one member of each team attends the opening ceremonies.</li>
+          <li>The submission deadline will be posted on Instagram (<strong>@pow417films</strong>) and emailed to registered participants after the ceremonies for those unable to attend.</li>
+        </ul>
       </div>
-    </div>
-  </div>
 
-  <div class="upload-section">
-    <div class="section-label">Submit Your Completed Releases</div>
-    <div id="upload-wrapper">
-      <form id="upload-form" novalidate>
-        <div class="upload-form-block">
-          <label for="team-name">Your Team Name <span class="req">*</span></label>
-          <input type="text" id="team-name" name="teamName" placeholder="e.g. Midnight Crew" required />
+      <div class="g-section" id="participants">
+        <div class="g-section-header">
+          <span class="g-num">03</span>
+          <h2 class="g-title">Participants</h2>
         </div>
-        <div class="upload-form-block">
-          <label>Photos of Completed Release Forms <span class="req">*</span></label>
-          <div class="file-drop" id="file-drop">
-            <input type="file" id="file-input" accept="image/*,.pdf" multiple />
-            <div class="file-drop-icon">📄</div>
-            <div class="file-drop-label">Tap or drag to add photos</div>
-            <div class="file-drop-sub">JPG, PNG, or PDF — up to 10 pages</div>
-          </div>
-          <div class="file-list" id="file-list"></div>
-        </div>
-        <div class="submit-area">
-          <button type="submit" id="upload-btn">Submit Releases</button>
-          <span id="upload-status"></span>
-        </div>
-      </form>
-    </div>
-    <div id="success-screen">
-      <h2>Releases<br><span>Received.</span></h2>
-      <p>Got it — releases for <strong id="success-team"></strong> have been submitted.<br>You're cleared for screening.</p>
-    </div>
-  </div>
+        <ul class="g-list">
+          <li>POW417 is open to <strong>any and all filmmakers,</strong> from amateurs to professionals.</li>
+          <li>Any person who contributes to the film in any way is considered a participant. If participants are added after registration, their names and roles must be listed in the submission.</li>
+          <li>Participants must <strong>volunteer their time</strong> — there may be no paid participants.</li>
+          <li>All participants must complete a <strong>Cast Release Form</strong> and/or <strong>Crew Release Form</strong> and submit it before the 48-hour deadline. (Included in the POW417 Release Form.)</li>
+          <li>Parental/guardian consent is required for participants <strong>under the age of 18.</strong> (Included in the POW417 Release Form.)</li>
+        </ul>
+      </div>
 
-  <div class="footer-note">
-    <div class="footer-note-num">※</div>
-    <div>
-      <div class="footer-note-title">Not Sure Which Ones You Need?</div>
-      <div class="footer-note-body">If you shot on someone's property — location release. If someone is on screen — cast release. If anyone is under 18 — minor release. If there's music — music release. Everyone on your crew — crew release. When in doubt, fill it out.</div>
-    </div>
+      <div class="g-section" id="prep">
+        <div class="g-section-header">
+          <span class="g-num">04</span>
+          <h2 class="g-title">Pre-Challenge Prep</h2>
+        </div>
+        <p style="font-size:0.85rem;opacity:0.6;margin-bottom:1.5rem;font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;line-height:1.8;">Prior to the opening ceremonies, teams may:</p>
+        <ul class="g-list">
+          <li>Organize team members (cast and crew)</li>
+          <li>Secure locations</li>
+          <li>Source music, sound effects, LUTs, equipment, props, costumes, and set pieces</li>
+        </ul>
+      </div>
+
+      <div class="g-section" id="film">
+        <div class="g-section-header">
+          <span class="g-num">05</span>
+          <h2 class="g-title">Film Requirements</h2>
+        </div>
+        <ul class="g-list">
+          <li>Must be <strong>entirely created</strong> during the allotted 48 hours.</li>
+          <li>Total runtime of <strong>five minutes (00:05:00:00) or less,</strong> including credits and OCC.</li>
+          <li>Must include an <strong>Opening Credit Card (OCC)</strong> at the beginning of the film.
+            <div class="format-block">
+              <span>Team Name</span>
+              <span>Completion Date</span>
+              <span>Film Title</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="g-section" id="poster">
+        <div class="g-section-header">
+          <span class="g-num">06</span>
+          <h2 class="g-title">Poster Requirements</h2>
+        </div>
+        <ul class="g-list">
+          <li>Poster must be made <strong>entirely during the allotted 48 hours.</strong></li>
+          <li>Must include the <strong>film title</strong> and your <strong>team name.</strong></li>
+          <li>Must be submitted as a <strong>JPEG or PNG.</strong></li>
+          <li>Resolution should be <strong>1080 × 1920 pixels.</strong></li>
+        </ul>
+      </div>
+
+      <div class="g-section" id="equipment">
+        <div class="g-section-header">
+          <span class="g-num">07</span>
+          <h2 class="g-title">Equipment</h2>
+        </div>
+        <ul class="g-list">
+          <li>Any type, brand, and number of video, film, or still cameras and sound equipment may be used.</li>
+        </ul>
+      </div>
+
+      <div class="g-section" id="submissions">
+        <div class="g-section-header">
+          <span class="g-num">08</span>
+          <h2 class="g-title">Submissions</h2>
+        </div>
+        <ul class="g-list">
+          <li>Films and posters must be submitted <strong>within the 48-hour time frame</strong> to be considered part of the challenge.</li>
+          <li>Films submitted late will still be screened following on-time entries but will <strong>not be considered official entries</strong> to POW417 2026.</li>
+          <li>To submit: upload your film to YouTube (<strong>Unlisted</strong>) and post the link along with your poster (JPEG or PNG) and release form (JPEG or PNG) to the submission portal at <strong>pow417.com.</strong></li>
+          <li>If additional participants were added after registration, their <strong>names and roles must be listed</strong> in the submission.</li>
+          <li>Your <strong>release form must be completed</strong> prior to the deadline.</li>
+        </ul>
+      </div>
+
+      <div class="g-section" id="screenings">
+        <div class="g-section-header">
+          <span class="g-num">09</span>
+          <h2 class="g-title">Screenings</h2>
+        </div>
+        <ul class="g-list">
+          <li>Submitted films will be shown at a <strong>public screening</strong> (date and location TBD).</li>
+          <li>Films will be screened in the <strong>order that submission emails are received.</strong></li>
+          <li>All completed films will be screened, but films submitted after the deadline will not be considered official entries.</li>
+          <li>Participants <strong>may not post their film in its entirety</strong> until after the public screening.</li>
+          <li>Posters, trailers, and other promotional materials <strong>may be posted</strong> prior to the screening.</li>
+        </ul>
+      </div>
+
+      <div class="g-section" id="prohibited">
+        <div class="g-section-header">
+          <span class="g-num">10</span>
+          <h2 class="g-title">Prohibited Actions</h2>
+        </div>
+        <ul class="g-list">
+          <li>No audio or visual content may be <strong>recorded prior to the beginning</strong> of the allotted 48 hours.</li>
+          <li>No <strong>stock footage, pre-existing content, or A.I.-generated material</strong> may be used.</li>
+          <li>No paid participation — all team members must be volunteers.</li>
+          <li><em>A.I. may not be used in any capacity at any time</em> during the production of your film.</li>
+          <li>No local, state, or federal laws may be broken during the production of your film.</li>
+        </ul>
+        <div class="g-warning">
+          <p>Participation in prohibited actions and/or failure to adhere to the POW417 guidelines will result in disqualification and your film will not be screened.</p>
+        </div>
+        <div class="g-consent">
+          <p>By submitting your film, you consent to it being played at the POW417 2026 public screening event, uploaded to the POW417 website, and used in POW417 promotional material.</p>
+          <p>The rights and ownership of your film remain in your hands.</p>
+        </div>
+      </div>
+
+    </main>
   </div>
 
   <footer>
@@ -174,80 +265,6 @@
     <p class="footer-copy">POW417 — Proof of Work — Springfield, MO — Human Films Only</p>
   </footer>
 
-  <script>
-    const UPLOAD_URL = 'https://script.google.com/macros/s/AKfycbzqGDWFOvgN0QHVDj0BF0HejPAIIDY9S-VE2uVp26mwTNI9JnP3cTlDv4yoJheF7UFk/exec';
-    const fileDrop = document.getElementById('file-drop');
-    const fileInput = document.getElementById('file-input');
-    const fileList = document.getElementById('file-list');
-    const form = document.getElementById('upload-form');
-    const btn = document.getElementById('upload-btn');
-    const statusEl = document.getElementById('upload-status');
-    let selectedFiles = [];
-
-    fileDrop.addEventListener('dragover', (e) => { e.preventDefault(); fileDrop.classList.add('dragover'); });
-    fileDrop.addEventListener('dragleave', () => fileDrop.classList.remove('dragover'));
-    fileDrop.addEventListener('drop', (e) => {
-      e.preventDefault();
-      fileDrop.classList.remove('dragover');
-      addFiles(e.dataTransfer.files);
-    });
-    fileInput.addEventListener('change', () => addFiles(fileInput.files));
-
-    function addFiles(files) {
-      for (const file of files) {
-        if (selectedFiles.length >= 10) break;
-        selectedFiles.push(file);
-      }
-      renderFileList();
-    }
-
-    function renderFileList() {
-      fileList.innerHTML = selectedFiles.map((f) =>
-        `<div class="file-list-item">${f.name} (${(f.size / 1024).toFixed(0)} KB)</div>`
-      ).join('');
-    }
-
-    function toBase64(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result.split(',')[1]);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const teamName = document.getElementById('team-name').value.trim();
-      if (!teamName) { statusEl.className = 'error'; statusEl.textContent = 'Please enter your team name.'; return; }
-      if (selectedFiles.length === 0) { statusEl.className = 'error'; statusEl.textContent = 'Please add at least one photo.'; return; }
-
-      btn.disabled = true;
-      btn.textContent = 'Uploading...';
-      statusEl.textContent = '';
-
-      try {
-        const filesData = await Promise.all(selectedFiles.map(async (file) => ({
-          name: file.name,
-          data: await toBase64(file)
-        })));
-
-        await fetch(UPLOAD_URL, {
-          method: 'POST',
-          body: JSON.stringify({ teamName, files: filesData })
-        });
-
-        document.getElementById('upload-wrapper').style.display = 'none';
-        document.getElementById('success-screen').style.display = 'block';
-        document.getElementById('success-team').textContent = teamName;
-      } catch (err) {
-        btn.disabled = false;
-        btn.textContent = 'Submit Releases';
-        statusEl.className = 'error';
-        statusEl.textContent = 'Upload failed. Try again or DM @pow417films.';
-      }
-    });
-  </script>
-<script src="nav.js"></script>
+  <script src="nav.js"></script>
 </body>
 </html>
