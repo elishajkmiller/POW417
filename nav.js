@@ -1,20 +1,32 @@
 // ─────────────────────────────────────────────
 //  POW417 — Nav Config
-//  Toggle buttons on/off here for all pages
+//  Toggle any button on/off here for all pages
 // ─────────────────────────────────────────────
 
 const NAV_BUTTONS = [
   {
-    label: 'Releases',
-    href:  'releases.html',
-    filled: false,
-    enabled: true,   // ← flip to false to hide on all pages
+    label:   'Guidelines',
+    href:    'guidelines.html',
+    filled:  false,
+    enabled: false,
   },
   {
-    label: 'Submit Film',
-    href:  'submission.html',
-    filled: true,
-    enabled: true,   // ← flip to false to hide on all pages
+    label:   'Register',
+    href:    'register.html',
+    filled:  false,
+    enabled: false,
+  },
+  {
+    label:   'Releases',
+    href:    'releases.html',
+    filled:  false,
+    enabled: true,
+  },
+  {
+    label:   'Submit Film',
+    href:    'submission.html',
+    filled:  true,
+    enabled: true,
   },
 ];
 
@@ -46,7 +58,6 @@ const NAV_BUTTONS = [
   nav.appendChild(ctas);
   document.body.prepend(nav);
 
-  // Scroll effect (index.html uses transparent nav)
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   });
