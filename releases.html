@@ -38,15 +38,6 @@
     .doc-btn:hover { background: var(--ink); color: var(--dust); }
     .doc-btn-filled { background: var(--ink); color: var(--dust); }
     .doc-btn-filled:hover { background: var(--ink-mid); }
-    .releases-grid { display: flex; flex-direction: column; gap: 0; }
-    .release-item { display: grid; grid-template-columns: 48px 1fr auto; gap: 2rem; align-items: center; padding: 2.25rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--ink); }
-    .release-item:first-child { border-top: 1px solid var(--border); }
-    .release-item:hover .release-arrow { transform: translateX(4px); opacity: 1; }
-    .release-item:hover .release-title { color: var(--red); }
-    .release-num { font-family: 'Space Mono', monospace; font-size: 0.6rem; opacity: 0.3; letter-spacing: 0.1em; }
-    .release-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.2rem); text-transform: uppercase; letter-spacing: 0.04em; line-height: 1; margin-bottom: 0.4rem; transition: color 0.2s; }
-    .release-desc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.5; text-transform: uppercase; line-height: 1.6; }
-    .release-arrow { font-size: 1.4rem; opacity: 0.25; transition: transform 0.2s, opacity 0.2s; flex-shrink: 0; }
     .upload-section { padding: 5rem 3rem 7rem; max-width: 960px; border-top: 1px solid var(--border); }
     .upload-form-block { margin-bottom: 2rem; }
     .upload-form-block > label { display: block; font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.82; margin-bottom: 0.6rem; }
@@ -63,6 +54,11 @@
     .file-list { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
     .file-list-item { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; opacity: 0.7; display: flex; align-items: center; gap: 0.5rem; }
     .file-list-item::before { content: '✓'; color: #3a7d4f; }
+    .progress-bar-wrap { margin-top: 1.5rem; display: none; }
+    .progress-bar-wrap.visible { display: block; }
+    .progress-bar-label { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.55; margin-bottom: 0.5rem; }
+    .progress-bar-track { height: 2px; background: rgba(17,16,8,0.1); width: 100%; }
+    .progress-bar-fill { height: 2px; background: var(--ink); width: 0%; transition: width 0.3s ease; }
     .submit-area { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
     button[type="submit"] { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.75rem 2rem; background: var(--ink); color: var(--dust); border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; }
     button[type="submit"]:hover { background: var(--ink-mid); transform: translateY(-1px); }
@@ -90,13 +86,22 @@
       .releases-body { padding: 3rem 1.5rem 2rem; }
       .upload-section { padding: 3rem 1.5rem 5rem; }
       .doc-block { padding: 1.5rem; }
-      .release-item { grid-template-columns: 32px 1fr auto; gap: 1rem; padding: 1.75rem 0; }
       .footer-note { padding: 2rem 1.5rem; }
       footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
+
+  <nav id="nav">
+    <a class="nav-logo" href="index.html">POW<span style="color:var(--red)">4</span>17</a>
+    <div class="nav-ctas">
+      <a href="guidelines.html" class="nav-cta">Guidelines</a>
+      <a href="register.html" class="nav-cta">Register</a>
+      <a href="releases.html" class="nav-cta nav-cta-filled">Releases</a>
+      <a href="submission.html" class="nav-cta">Submit Film</a>
+    </div>
+  </nav>
 
   <header class="page-header">
     <div class="page-header-bg" aria-hidden="true">Release</div>
@@ -138,9 +143,13 @@
             <input type="file" id="file-input" accept="image/*,.pdf" multiple />
             <div class="file-drop-icon">📄</div>
             <div class="file-drop-label">Tap or drag to add photos</div>
-            <div class="file-drop-sub">JPG, PNG, or PDF — up to 10 pages</div>
+            <div class="file-drop-sub">JPG, PNG, or PDF — up to 20 files</div>
           </div>
           <div class="file-list" id="file-list"></div>
+          <div class="progress-bar-wrap" id="progress-wrap">
+            <div class="progress-bar-label" id="progress-label">Uploading…</div>
+            <div class="progress-bar-track"><div class="progress-bar-fill" id="progress-fill"></div></div>
+          </div>
         </div>
         <div class="submit-area">
           <button type="submit" id="upload-btn">Submit Releases</button>
@@ -169,16 +178,21 @@
 
   <script>
     const UPLOAD_URL = 'https://script.google.com/macros/s/AKfycbzqGDWFOvgN0QHVDj0BF0HejPAIIDY9S-VE2uVp26mwTNI9JnP3cTlDv4yoJheF7UFk/exec';
-    const fileDrop = document.getElementById('file-drop');
-    const fileInput = document.getElementById('file-input');
-    const fileList = document.getElementById('file-list');
-    const form = document.getElementById('upload-form');
-    const btn = document.getElementById('upload-btn');
-    const statusEl = document.getElementById('upload-status');
+
+    const fileDrop   = document.getElementById('file-drop');
+    const fileInput  = document.getElementById('file-input');
+    const fileList   = document.getElementById('file-list');
+    const form       = document.getElementById('upload-form');
+    const btn        = document.getElementById('upload-btn');
+    const statusEl   = document.getElementById('upload-status');
+    const progressWrap  = document.getElementById('progress-wrap');
+    const progressFill  = document.getElementById('progress-fill');
+    const progressLabel = document.getElementById('progress-label');
+
     let selectedFiles = [];
 
-    fileDrop.addEventListener('dragover', (e) => { e.preventDefault(); fileDrop.classList.add('dragover'); });
-    fileDrop.addEventListener('dragleave', () => fileDrop.classList.remove('dragover'));
+    fileDrop.addEventListener('dragover',  (e) => { e.preventDefault(); fileDrop.classList.add('dragover'); });
+    fileDrop.addEventListener('dragleave', ()  => fileDrop.classList.remove('dragover'));
     fileDrop.addEventListener('drop', (e) => {
       e.preventDefault();
       fileDrop.classList.remove('dragover');
@@ -188,7 +202,7 @@
 
     function addFiles(files) {
       for (const file of files) {
-        if (selectedFiles.length >= 10) break;
+        if (selectedFiles.length >= 20) break;
         selectedFiles.push(file);
       }
       renderFileList();
@@ -203,7 +217,7 @@
     function toBase64(file) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onload  = () => resolve(reader.result.split(',')[1]);
         reader.onerror = reject;
         reader.readAsDataURL(file);
       });
@@ -212,35 +226,59 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const teamName = document.getElementById('team-name').value.trim();
-      if (!teamName) { statusEl.className = 'error'; statusEl.textContent = 'Please enter your team name.'; return; }
-      if (selectedFiles.length === 0) { statusEl.className = 'error'; statusEl.textContent = 'Please add at least one photo.'; return; }
 
-      btn.disabled = true;
-      btn.textContent = 'Uploading...';
+      if (!teamName) {
+        statusEl.className   = 'error';
+        statusEl.textContent = 'Please enter your team name.';
+        return;
+      }
+      if (selectedFiles.length === 0) {
+        statusEl.className   = 'error';
+        statusEl.textContent = 'Please add at least one photo.';
+        return;
+      }
+
+      btn.disabled         = true;
       statusEl.textContent = '';
+      progressWrap.classList.add('visible');
 
       try {
-        const filesData = await Promise.all(selectedFiles.map(async (file) => ({
-          name: file.name,
-          data: await toBase64(file)
-        })));
+        // Upload one file at a time to stay under Apps Script's request size limit
+        for (let i = 0; i < selectedFiles.length; i++) {
+          const file     = selectedFiles[i];
+          const pct      = Math.round(((i) / selectedFiles.length) * 100);
+          progressFill.style.width  = pct + '%';
+          progressLabel.textContent = `Uploading ${i + 1} of ${selectedFiles.length} — ${file.name}`;
+          btn.textContent           = `Uploading ${i + 1} of ${selectedFiles.length}…`;
 
-        await fetch(UPLOAD_URL, {
-          method: 'POST',
-          body: JSON.stringify({ teamName, files: filesData })
-        });
+          const fileData = await toBase64(file);
+          await fetch(UPLOAD_URL, {
+            method: 'POST',
+            mode:   'no-cors',
+            body:   JSON.stringify({
+              teamName,
+              files: [{ name: file.name, data: fileData }]
+            })
+          });
+        }
+
+        progressFill.style.width  = '100%';
+        progressLabel.textContent = 'Done!';
 
         document.getElementById('upload-wrapper').style.display = 'none';
         document.getElementById('success-screen').style.display = 'block';
-        document.getElementById('success-team').textContent = teamName;
+        document.getElementById('success-team').textContent     = teamName;
+
       } catch (err) {
-        btn.disabled = false;
-        btn.textContent = 'Submit Releases';
-        statusEl.className = 'error';
+        btn.disabled         = false;
+        btn.textContent      = 'Submit Releases';
+        statusEl.className   = 'error';
         statusEl.textContent = 'Upload failed. Try again or DM @pow417films.';
+        progressWrap.classList.remove('visible');
+        console.error(err);
       }
     });
   </script>
-<script src="nav.js"></script>
+
 </body>
 </html>
