@@ -35,7 +35,7 @@ Registration form submissions are handled via Google Apps Script and written to 
 
 - **Opening Ceremony:** April 25, 2026 — 6:00 PM — 412 S Campbell Ave, Springfield, MO 65806
 - **Submission Deadline:** 48 hours after opening ceremony closes
-- **Screening:** TBD
+- **Screening:** The POW417 Showcase — July 25, 2026 — 7:30 PM — The Moxie, Springfield, MO
 
 ## Contact
 
