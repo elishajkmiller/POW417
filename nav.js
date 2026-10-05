@@ -14,7 +14,7 @@ const NAV_BUTTONS = [
     label:   'Register',
     href:    'register.html',
     filled:  false,
-    enabled: false,
+    enabled: true,
   },
   {
     label:   'Releases',
