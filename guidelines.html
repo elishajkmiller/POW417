@@ -68,10 +68,9 @@
     .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.3; }
 
     @media (max-width: 768px) {
-      nav { padding: 0.75rem 1rem; }
-      .nav-ctas { display: block !important; }
-      .nav-cta { display: block; font-size: 0.5rem !important; padding: 0.4rem 0.35rem !important; text-align: center; letter-spacing: 0.06em; }
-      .nav-cta + .nav-cta { margin-top: 0.35rem; }
+      nav { padding: 0.75rem 1rem; flex-direction: column; gap: 0.5rem; }
+      .nav-ctas { display: flex !important; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+      .nav-cta { font-size: 0.55rem; padding: 0.45rem 0.6rem; letter-spacing: 0.08em; }
       .page-header { padding: 7rem 1.5rem 3rem; }
       .guidelines-wrap { grid-template-columns: 1fr; }
       .guidelines-content { padding: 3rem 1.5rem 5rem; }

@@ -78,10 +78,9 @@
     .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.25rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; text-decoration: none; color: var(--ink); }
     .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.3; }
     @media (max-width: 768px) {
-      nav { padding: 0.75rem 1rem; }
-      .nav-ctas { display: block !important; }
-      .nav-cta { display: block; font-size: 0.5rem !important; padding: 0.4rem 0.35rem !important; text-align: center; letter-spacing: 0.06em; }
-      .nav-cta + .nav-cta { margin-top: 0.35rem; }
+      nav { padding: 0.75rem 1rem; flex-direction: column; gap: 0.5rem; }
+      .nav-ctas { display: flex !important; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+      .nav-cta { font-size: 0.55rem; padding: 0.45rem 0.6rem; letter-spacing: 0.08em; }
       .page-header { padding: 7rem 1.5rem 3rem; }
       .notice-banner { padding: 0.75rem 1.5rem; }
       .releases-body { padding: 3rem 1.5rem 2rem; }
