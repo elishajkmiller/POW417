@@ -77,10 +77,27 @@
   .rule-badge { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; border: 1px solid currentColor; margin-left: 0.6rem; vertical-align: middle; position: relative; top: -2px; }
   .badge-hard { color: var(--red); border-color: var(--red); }
   .badge-core { color: #555; border-color: #aaa; }
-  .register-section { background: var(--ink); color: var(--dust); padding: 10rem 3rem; text-align: center; position: relative; overflow: hidden; }
-  .register-bg-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 22vw; text-transform: uppercase; white-space: nowrap; opacity: 0.04; letter-spacing: -0.04em; pointer-events: none; user-select: none; }
-  .register-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(3rem, 9vw, 7rem); text-transform: uppercase; line-height: 0.88; margin-bottom: 2rem; position: relative; z-index: 1; }
-  .register-sub { font-size: 1rem; opacity: 0.72; max-width: 440px; margin: 0 auto 3rem; position: relative; z-index: 1; line-height: 1.7; }
+  .films-section { background: var(--ink); color: var(--dust); padding: 8rem 3rem; position: relative; overflow: hidden; }
+  .films-bg-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 22vw; text-transform: uppercase; white-space: nowrap; opacity: 0.04; letter-spacing: -0.04em; pointer-events: none; user-select: none; }
+  .films-head { text-align: center; margin-bottom: 4rem; position: relative; z-index: 1; }
+  .films-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(3rem, 9vw, 6rem); text-transform: uppercase; line-height: 0.88; margin-bottom: 1.5rem; }
+  .films-headline span { color: var(--red-light); }
+  .films-sub { font-size: 1rem; opacity: 0.72; max-width: 480px; margin: 0 auto; line-height: 1.7; }
+  .films-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(234,224,216,0.15); border: 1px solid rgba(234,224,216,0.15); max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+  .film-card { background: var(--ink); padding: 3rem 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .film-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .film-num { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; opacity: 0.35; }
+  .film-team { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.55; }
+  .film-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 0.03em; line-height: 1; }
+  .film-watch { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dust); text-decoration: none; border: 1.5px solid rgba(234,224,216,0.4); padding: 0.55rem 1.1rem; align-self: flex-start; transition: background 0.2s, color 0.2s, border-color 0.2s; margin-top: auto; }
+  .film-watch:hover { background: var(--dust); color: var(--ink); border-color: var(--dust); }
+  .next-section { text-align: center; }
+  .next-section .section-label { justify-content: center; }
+  .next-section .section-label::before { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .next-bg-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 18vw; text-transform: uppercase; white-space: nowrap; opacity: 0.04; letter-spacing: -0.04em; pointer-events: none; user-select: none; }
+  .next-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(3rem, 9vw, 7rem); text-transform: uppercase; line-height: 0.88; margin-bottom: 2rem; position: relative; z-index: 1; }
+  .next-sub { font-size: 1rem; opacity: 0.72; max-width: 440px; margin: 0 auto 3rem; position: relative; z-index: 1; line-height: 1.7; }
+  section { position: relative; }
   footer { padding: 3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); gap: 2rem; flex-wrap: wrap; }
   .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.25rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; }
   .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.3; }
@@ -100,15 +117,19 @@
   @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
   @media (max-width: 768px) {
     nav { padding: 0.75rem 1rem; }
-    .nav-ctas { display: grid !important; grid-template-columns: 1fr 1fr; gap: 0.35rem; }
-    .nav-cta { font-size: 0.5rem !important; padding: 0.4rem 0.35rem !important; text-align: center; letter-spacing: 0.06em; }
+    .nav-ctas { display: block !important; }
+    .nav-cta { display: block; font-size: 0.5rem !important; padding: 0.4rem 0.35rem !important; text-align: center; letter-spacing: 0.06em; }
+    .nav-cta + .nav-cta { margin-top: 0.35rem; }
     section { padding: 5rem 1.5rem; }
     .hero { padding: 0 1.5rem 3rem; }
     .manifesto { padding: 5rem 1.5rem; }
     .manifesto-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .philosophy-grid { grid-template-columns: 1fr; gap: 3rem; }
     .phil-sidebar { position: static; }
-    .register-section { padding: 7rem 1.5rem; }
+    .films-section { padding: 5rem 1.5rem; }
+    .films-grid { grid-template-columns: 1fr; }
+    .next-section { padding: 7rem 1.5rem; }
+    .next-bg-text { font-size: 26vw; }
     footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
     .hero-sub { flex-direction: column; align-items: flex-start; }
     .hero-meta { text-align: left; }
@@ -134,16 +155,16 @@
   <div class="hero-sub">
     <p class="hero-tagline">Proof of Work<br>A 48-Hour Human Film Gathering<br>Springfield, MO</p>
     <div class="hero-meta">
-      <span class="date-label">July 25 — 7:30 PM</span>
-      <span class="date-val">The Showcase @ The Moxie</span>
+      <span class="date-label">March 19, 2027</span>
+      <span class="date-val">Springfield, MO — Details Soon</span>
     </div>
   </div>
   <div class="hero-ticker" aria-hidden="true">Made by hand — shot on camera — cut in the edit — no shortcuts — proof of work — made by hand —</div>
 </section>
 <div class="marquee-wrap" aria-hidden="true">
   <div class="marquee-inner">
-    <div class="marquee-item">Showcase — July 25 <span class="marquee-dot"></span></div>
-    <div class="marquee-item">The Moxie — 7:30 PM <span class="marquee-dot"></span></div>
+    <div class="marquee-item">March 19, 2027 <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Details Coming Soon <span class="marquee-dot"></span></div>
     <div class="marquee-item">48 Hours <span class="marquee-dot"></span></div>
     <div class="marquee-item">No AI <span class="marquee-dot"></span></div>
     <div class="marquee-item">Real Craft <span class="marquee-dot"></span></div>
@@ -152,8 +173,8 @@
     <div class="marquee-item">Springfield MO <span class="marquee-dot"></span></div>
     <div class="marquee-item">Not a Competition <span class="marquee-dot"></span></div>
     <div class="marquee-item">Just Filmmakers <span class="marquee-dot"></span></div>
-    <div class="marquee-item">Showcase — July 25 <span class="marquee-dot"></span></div>
-    <div class="marquee-item">The Moxie — 7:30 PM <span class="marquee-dot"></span></div>
+    <div class="marquee-item">March 19, 2027 <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Details Coming Soon <span class="marquee-dot"></span></div>
     <div class="marquee-item">48 Hours <span class="marquee-dot"></span></div>
     <div class="marquee-item">No AI <span class="marquee-dot"></span></div>
     <div class="marquee-item">Real Craft <span class="marquee-dot"></span></div>
@@ -165,10 +186,28 @@
   </div>
 </div>
 
-<section class="register-section" id="showcase">
-  <div class="register-bg-text" aria-hidden="true">JULY 25</div>
-  <h2 class="register-headline reveal reveal-delay-1">The Films<br>Are In.<br>Now We Watch.</h2>
-  <p class="register-sub reveal reveal-delay-2">The POW417 Showcase: Saturday, July 25th at 7:30 PM at The Moxie, Springfield, MO.</p>
+<section class="films-section" id="films">
+  <div class="films-bg-text" aria-hidden="true">2026</div>
+  <div class="films-head">
+    <h2 class="films-headline reveal">The 2026<br><span>Films</span></h2>
+    <p class="films-sub reveal reveal-delay-1">Eight crews. Forty-eight hours each. Every frame made by hand.</p>
+  </div>
+  <div class="films-grid">
+    <div class="film-card reveal"><div class="film-top"><span class="film-num">01</span><span class="film-team">Necrotic Studios</span></div><div class="film-title">Heading Home</div><a class="film-watch" href="https://youtu.be/byEvRLZ9Flo" target="_blank" rel="noopener">Watch on YouTube &#8594;</a></div>
+    <div class="film-card reveal reveal-delay-1"><div class="film-top"><span class="film-num">02</span><span class="film-team">Nate :)</span></div><div class="film-title">Going Outside</div><a class="film-watch" href="https://youtu.be/sgbPR0M-kUU" target="_blank" rel="noopener">Watch on YouTube &#8594;</a></div>
+    <div class="film-card reveal"><div class="film-top"><span class="film-num">03</span><span class="film-team">House of Keeling</span></div><div class="film-title">The Inbetween</div><a class="film-watch" href="https://youtu.be/rvxGsUAnCqI" target="_blank" rel="noopener">Watch on YouTube &#8594;</a></div>
+    <div class="film-card reveal reveal-delay-1"><div class="film-top"><span class="film-num">04</span><span class="film-team">03 Media</span></div><div class="film-title">Darkness That Follows</div><a class="film-watch" href="https://youtu.be/BDqQNr-fyKU" target="_blank" rel="noopener">Watch on YouTube &#8594;</a></div>
+    <div class="film-card reveal"><div class="film-top"><span class="film-num">05</span><span class="film-team">SweetBogsTv &amp; CIDERHOUSE</span></div><div class="film-title">Clogged Up</div><a class="film-watch" href="https://youtu.be/4VEIHduw8F8" target="_blank" rel="noopener">Watch on YouTube &#8594;</a></div>
+    <div class="film-card reveal reveal-delay-1"><div class="film-top"><span class="film-num">06</span><span class="film-team">A1 &amp; A2 Productions</span></div><div class="film-title">Podcast Pete</div><a class="film-watch" href="https://youtu.be/AU_pT_WoedQ" target="_blank" rel="noopener">Watch on YouTube &#8594;</a></div>
+    <div class="film-card reveal"><div class="film-top"><span class="film-num">07</span><span class="film-team">Yellow Bike Films</span></div><div class="film-title">Seeing Double</div><a class="film-watch" href="https://youtu.be/f0_jPYrHwec" target="_blank" rel="noopener">Watch on YouTube &#8594;</a></div>
+    <div class="film-card reveal reveal-delay-1"><div class="film-top"><span class="film-num">08</span><span class="film-team">FourBair</span></div><div class="film-title">What's Eating You</div><a class="film-watch" href="https://youtu.be/-wuu1kRZHEI" target="_blank" rel="noopener">Watch on YouTube &#8594;</a></div>
+  </div>
+</section>
+
+<section class="next-section" id="showcase">
+  <div class="next-bg-text" aria-hidden="true">2027</div>
+  <h2 class="next-headline reveal">POW417<br>2027</h2>
+  <p class="next-sub reveal reveal-delay-1">The clock starts March 19, 2027. Location and showcase details coming soon.</p>
 </section>
 
 <hr class="h-rule">
@@ -180,7 +219,7 @@
     <div class="hour-block" data-num="01"><div class="hour-time">Hours 01–12 — Pre-Pro</div><div class="hour-title">Write & Prep</div><div class="hour-desc">Develop your concept, write your script, scout locations, cast your crew. This is where your film starts to exist.</div></div>
     <div class="hour-block" data-num="02"><div class="hour-time">Hours 12–36 — Production</div><div class="hour-title">Shoot It</div><div class="hour-desc">Roll camera. Everything is practical — real locations, real light, real performances. No AI-generated anything.</div></div>
     <div class="hour-block" data-num="03"><div class="hour-time">Hours 36–48 — Post</div><div class="hour-title">Cut & Deliver</div><div class="hour-desc">Edit, mix, color, and deliver. Human hands on every frame. Submission is final. The clock is the great equalizer.</div></div>
-    <div class="hour-block" data-num="04"><div class="hour-time">The Showcase — July 25, 7:30 PM</div><div class="hour-title">We Watch Together</div><div class="hour-desc">Every film screens publicly at The Moxie. Every crew gets seen. No winners, no losers — just filmmakers in the same room.</div></div>
+    <div class="hour-block" data-num="04"><div class="hour-time">The Showcase — Date TBA</div><div class="hour-title">We Watch Together</div><div class="hour-desc">Every film screens publicly at the showcase. Every crew gets seen. No winners, no losers — just filmmakers in the same room.</div></div>
   </div>
 </section>
 
@@ -212,7 +251,8 @@
 <footer>
   <div class="footer-logo">POW<span style="color:var(--red)">4</span>17</div>
   <ul class="footer-links">
-    <li><a href="#showcase">Showcase</a></li>
+    <li><a href="#films">2026 Films</a></li>
+    <li><a href="#showcase">2027</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#the48">The 48</a></li>
     <li><a href="#rules">Rules</a></li>
